@@ -4,54 +4,9 @@ import {
 	useState,
 	useMemo,
 	useCallback,
-	memo,
 } from "react";
-
-type Relic = {
-	tier: string;
-	relicName: string;
-	state: string;
-	rewards: Array<Item>;
-	_id: string;
-};
-
-type Item = {
-	_id: string;
-	itemName: string;
-	rarity: string;
-	chance: number;
-};
-
-// Memoized component for rendering rewards
-const RewardsList = memo(({ rewards }: { rewards: Item[] }) => (
-	<ul>
-		{rewards.map((reward) => (
-			<li key={reward._id + reward.chance}>
-				<span>
-					{reward.itemName} -{" "}
-					{reward.chance === 25.33
-						? "C"
-						: reward.chance === 11
-							? "U"
-							: reward.chance === 2
-								? "R"
-								: ""}
-				</span>
-			</li>
-		))}
-	</ul>
-));
-
-// Memoized component for table rows
-const RelicRow = memo(({ relic }: { relic: Relic }) => (
-	<tr>
-		<td>{relic.relicName}</td>
-		<td>{relic.tier}</td>
-		<td>
-			<RewardsList rewards={relic.rewards} />
-		</td>
-	</tr>
-));
+import RelicTable from "./components/RelicTable";
+import type { Relic } from "./types/Relic";
 
 function App() {
 	const [relicData, setRelicData] = useState<Relic[]>([]);
@@ -119,34 +74,33 @@ function App() {
 			<h1>Warframe Relic LFG</h1>
 
 			<div>
-				<label htmlFor="search">Search</label>
-				<input
-					type="text"
-					name="search"
-					id="search"
-					value={searchInput}
-					onChange={handleSearchChange}
-					placeholder="Enter 2+ characters to search..."
-				/>
+				<form>
+					<label htmlFor="search">
+						Search
+						<input
+							type="text"
+							name="search"
+							id="search"
+							value={searchInput}
+							onChange={handleSearchChange}
+							placeholder="Enter 2+ characters to search..."
+						/>
+					</label>
+					<label htmlFor="relicsDisplayCount">
+						<select name="relicsDisplayCount" id="relicsDisplayCount">
+							<option value="5">5</option>
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="all">all</option>
+						</select>
+					</label>
+				</form>
 			</div>
 
 			{isLoading ? (
 				<div>Loading relics...</div>
 			) : (
-				<table>
-					<thead>
-						<tr>
-							<th>Relic Name</th>
-							<th>Tier</th>
-							<th>Rewards</th>
-						</tr>
-					</thead>
-					<tbody>
-						{filteredRelics.map((relic) => (
-							<RelicRow key={relic._id + relic.relicName} relic={relic} />
-						))}
-					</tbody>
-				</table>
+				<RelicTable relicData={filteredRelics} />
 			)}
 		</div>
 	);

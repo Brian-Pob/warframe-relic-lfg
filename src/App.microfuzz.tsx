@@ -1,12 +1,7 @@
-import {
-	useDeferredValue,
-	useEffect,
-	useState,
-	useCallback,
-	memo,
-} from "react";
+import { useDeferredValue, useEffect, useState, useCallback } from "react";
 
 import { useFuzzySearchList } from "@nozbe/microfuzz/react";
+import RelicTable from "./components/RelicTable";
 
 type Relic = {
 	tier: string;
@@ -23,42 +18,13 @@ type Item = {
 	chance: number;
 };
 
-// Memoized component for rendering rewards
-const RewardsList = memo(({ rewards }: { rewards: Item[] }) => (
-	<ul>
-		{rewards.map((reward) => (
-			<li key={reward._id + reward.chance}>
-				<span>
-					{reward.itemName} -{" "}
-					{reward.chance === 25.33
-						? "C"
-						: reward.chance === 11
-							? "U"
-							: reward.chance === 2
-								? "R"
-								: ""}
-				</span>
-			</li>
-		))}
-	</ul>
-));
-
-// Memoized component for table rows
-const RelicRow = memo(({ relic }: { relic: Relic }) => (
-	<tr>
-		<td>{relic.relicName}</td>
-		<td>{relic.tier}</td>
-		<td>
-			<RewardsList rewards={relic.rewards} />
-		</td>
-	</tr>
-));
-
 function App() {
 	const [relicData, setRelicData] = useState<Relic[]>([]);
 	const [searchInput, setSearchInput] = useState("");
 	const deferredSearchInput = useDeferredValue(searchInput);
 	const [isLoading, setIsLoading] = useState(true);
+	const [selectedRelicsDisplayCount, setSelectedRelicsDisplayCount] =
+		useState(5);
 
 	// Memoized fetch function
 	const fetchRelics = useCallback(async () => {
@@ -90,13 +56,6 @@ function App() {
 		fetchRelics();
 	}, [fetchRelics]);
 
-	// const fuzzySearch = createFuzzySearch(relicData, {
-	// 	getText: (relic) => [
-	// 		relic.relicName,
-	// 		relic.rewards.map((reward: Item) => reward.itemName).join(","),
-	// 	],
-	// });
-
 	const filteredRelicsList = useFuzzySearchList({
 		list: relicData.filter((relic) => relic.state === "Intact"),
 		queryText: deferredSearchInput,
@@ -124,36 +83,54 @@ function App() {
 			<h1>Warframe Relic LFG</h1>
 
 			<div>
-				<label htmlFor="search">Search</label>
-				<input
-					type="text"
-					name="search"
-					id="search"
-					value={searchInput}
-					onChange={handleSearchChange}
-					placeholder="Enter 2+ characters to search..."
-				/>
+				<form>
+					<label htmlFor="search">
+						Search
+						<input
+							type="text"
+							name="search"
+							id="search"
+							value={searchInput}
+							onChange={handleSearchChange}
+							placeholder="Enter 2+ characters to search..."
+						/>
+					</label>
+					<label htmlFor="relicsDisplayCount">
+						Relics to display
+						<select
+							name="relicsDisplayCount"
+							id="relicsDisplayCount"
+							value={selectedRelicsDisplayCount}
+							onChange={(e) =>
+								setSelectedRelicsDisplayCount(Number.parseInt(e.target.value))
+							}
+						>
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="40">40</option>
+							{/* <option value="all">all</option> */}
+						</select>
+					</label>
+				</form>
 			</div>
-
-			{isLoading ? (
-				<div>Loading relics...</div>
-			) : (
-				<table>
-					<thead>
-						<tr>
-							<th>Relic Name</th>
-							<th>Tier</th>
-							<th>Rewards</th>
-						</tr>
-					</thead>
-					<tbody>
-						{deferredSearchInput.length >= 2 &&
-							filteredRelicsList.map(({ item: relic }) => (
-								<RelicRow key={relic._id + relic.relicName} relic={relic} />
-							))}
-					</tbody>
-				</table>
-			)}
+			<table>
+				<thead>
+					<tr>
+						<th>Relic Name</th>
+						<th>Tier</th>
+						<th>Rewards</th>
+					</tr>
+				</thead>
+				<tbody>
+					{!isLoading && deferredSearchInput.length >= 2 && (
+						<RelicTable
+							relicData={filteredRelicsList
+								.slice(0, selectedRelicsDisplayCount)
+								.map(({ item }) => item)}
+						/>
+					)}
+				</tbody>
+			</table>
 		</div>
 	);
 }
