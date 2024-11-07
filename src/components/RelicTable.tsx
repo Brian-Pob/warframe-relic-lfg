@@ -23,9 +23,11 @@ const RewardsList = memo(({ rewards }: { rewards: Item[] }) => (
 ));
 
 // Memoized component for table rows
-const RelicRow = memo(({ relic }: { relic: Relic }) => (
+const RelicRow = memo(({ relic, index }: { relic: Relic; index: number }) => (
 	<tr>
-		<td>{relic.relicName}</td>
+		<td>
+			{index + 1} - {relic.relicName}
+		</td>
 		<td>{relic.tier}</td>
 		<td>
 			<RewardsList rewards={relic.rewards} />
@@ -34,8 +36,8 @@ const RelicRow = memo(({ relic }: { relic: Relic }) => (
 ));
 
 const RelicTable = memo(({ relicData }: { relicData: Relic[] }) => {
-	return relicData.map((relic: Relic) => (
-		<RelicRow key={relic._id + relic.relicName} relic={relic} />
+	return relicData.map((relic: Relic, index: number) => (
+		<RelicRow key={relic._id + relic.relicName} relic={relic} index={index} />
 	));
 });
 

@@ -1,22 +1,17 @@
-import { useDeferredValue, useEffect, useState, useCallback } from "react";
-
+import React, {
+	useDeferredValue,
+	useEffect,
+	useState,
+	useCallback,
+	useMemo,
+} from "react";
 import { useFuzzySearchList } from "@nozbe/microfuzz/react";
+import type { Relic, Item } from "./types/Relic";
 import RelicTable from "./components/RelicTable";
 
-type Relic = {
-	tier: string;
-	relicName: string;
-	state: string;
-	rewards: Array<Item>;
-	_id: string;
-};
+import "./App.css";
 
-type Item = {
-	_id: string;
-	itemName: string;
-	rarity: string;
-	chance: number;
-};
+const MemoizedRelicTable = React.memo(RelicTable);
 
 function App() {
 	const [relicData, setRelicData] = useState<Relic[]>([]);
@@ -24,7 +19,7 @@ function App() {
 	const deferredSearchInput = useDeferredValue(searchInput);
 	const [isLoading, setIsLoading] = useState(true);
 	const [selectedRelicsDisplayCount, setSelectedRelicsDisplayCount] =
-		useState(5);
+		useState("10");
 
 	// Memoized fetch function
 	const fetchRelics = useCallback(async () => {
@@ -78,8 +73,17 @@ function App() {
 		[],
 	);
 
+	const relicTableData = useMemo(() => {
+		if (selectedRelicsDisplayCount === "all") {
+			return filteredRelicsList.map(({ item }) => item);
+		}
+		return filteredRelicsList
+			.slice(0, Number.parseInt(selectedRelicsDisplayCount))
+			.map(({ item }) => item);
+	}, [filteredRelicsList, selectedRelicsDisplayCount]);
+
 	return (
-		<div>
+		<main>
 			<h1>Warframe Relic LFG</h1>
 
 			<div>
@@ -101,14 +105,14 @@ function App() {
 							name="relicsDisplayCount"
 							id="relicsDisplayCount"
 							value={selectedRelicsDisplayCount}
-							onChange={(e) =>
-								setSelectedRelicsDisplayCount(Number.parseInt(e.target.value))
-							}
+							onChange={(e) => {
+								setSelectedRelicsDisplayCount(e.target.value);
+							}}
 						>
 							<option value="10">10</option>
 							<option value="20">20</option>
 							<option value="40">40</option>
-							{/* <option value="all">all</option> */}
+							<option value="all">all</option>
 						</select>
 					</label>
 				</form>
@@ -123,15 +127,11 @@ function App() {
 				</thead>
 				<tbody>
 					{!isLoading && deferredSearchInput.length >= 2 && (
-						<RelicTable
-							relicData={filteredRelicsList
-								.slice(0, selectedRelicsDisplayCount)
-								.map(({ item }) => item)}
-						/>
+						<MemoizedRelicTable relicData={relicTableData} />
 					)}
 				</tbody>
 			</table>
-		</div>
+		</main>
 	);
 }
 

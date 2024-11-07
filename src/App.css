@@ -1,0 +1,23 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 10vh;
+  height: 100svh;
+}
+
+form {
+  display: flex;
+  gap: 1rem;
+
+  > label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+table {
+  width: min(100%, 50rem);
+}
