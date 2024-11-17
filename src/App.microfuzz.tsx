@@ -62,7 +62,7 @@ function App() {
 			item,
 			highlightRanges,
 		}),
-		strategy: "off",
+		strategy: "smart",
 	});
 
 	// Debounced search input handler
@@ -74,31 +74,39 @@ function App() {
 	);
 
 	const relicTableData = useMemo(() => {
+		if (deferredSearchInput.length < 2) {
+			return [];
+		}
+
 		if (selectedRelicsDisplayCount === "all") {
 			return filteredRelicsList.map(({ item }) => item);
 		}
 		return filteredRelicsList
 			.slice(0, Number.parseInt(selectedRelicsDisplayCount))
 			.map(({ item }) => item);
-	}, [filteredRelicsList, selectedRelicsDisplayCount]);
+	}, [filteredRelicsList, selectedRelicsDisplayCount, deferredSearchInput]);
 
 	return (
 		<main>
-			<h1>Warframe Relic LFG</h1>
+			<h1 id="title">Warframe Relic LFG</h1>
 
 			<div>
 				<form>
-					<label htmlFor="search">
-						Search
-						<input
-							type="text"
-							name="search"
-							id="search"
-							value={searchInput}
-							onChange={handleSearchChange}
-							placeholder="Enter 2+ characters to search..."
-						/>
-					</label>
+					<div>
+						<label htmlFor="search">
+							Search
+							<input
+								type="text"
+								name="search"
+								id="search"
+								value={searchInput}
+								onChange={handleSearchChange}
+							/>
+						</label>
+						{deferredSearchInput.length >= 2 && (
+							<span>Found {filteredRelicsList.length} relics</span>
+						)}
+					</div>
 					<label htmlFor="relicsDisplayCount">
 						Relics to display
 						<select
@@ -126,11 +134,18 @@ function App() {
 					</tr>
 				</thead>
 				<tbody>
-					{!isLoading && deferredSearchInput.length >= 2 && (
-						<MemoizedRelicTable relicData={relicTableData} />
+					{!isLoading && (
+						<MemoizedRelicTable
+							relicData={relicTableData}
+							searchInput={deferredSearchInput}
+						/>
 					)}
 				</tbody>
 			</table>
+			<a href="#title" className="back-to-top">
+				<span className="sr-only">Back to top</span>
+				&uarr;
+			</a>
 		</main>
 	);
 }

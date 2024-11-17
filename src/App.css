@@ -3,21 +3,90 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  margin-top: 10vh;
   height: 100svh;
+
+  @media (width>=600px) {
+    margin-block-start: 10vh;
+  }
+}
+
+h1 {
+  text-align: center;
 }
 
 form {
   display: flex;
-  gap: 1rem;
+  flex-direction: row;
+  gap: 2rem;
 
-  > label {
+  label {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    position: relative;
+  }
+
+  span {
+    position: absolute;
+    opacity: 0.7;
+    font-size: 85%;
+    text-align: center;
+  }
+
+  @media (width<600px) {
+    flex-direction: column;
   }
 }
 
 table {
-  width: min(100%, 50rem);
+  width: min(100%, 35rem);
+
+  @media (width<600px) {
+    width: 98%;
+  }
+}
+
+thead {
+  th:nth-child(1) {
+    width: 20%;
+  }
+
+  th:nth-child(2) {
+    width: 12%;
+  }
+
+  /* 3rd column takes up remaining space */
+}
+
+ul {
+  list-style: none;
+  padding-inline-start: 0.5rem;
+}
+
+li {
+  max-width: fit-content;
+  padding: 0;
+
+  &.matches {
+    outline: 2px solid currentColor;
+    outline-offset: 0.2rem;
+    border-radius: 5px;
+    margin-block: 0.4rem;
+  }
+}
+
+.back-to-top {
+  color: var(--text-1);
+  width: 3.5rem;
+  aspect-ratio: 1/1;
+
+  border: 2px solid currentColor;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 5vh;
+  right: 5vw;
+  font-size: xx-large;
 }
