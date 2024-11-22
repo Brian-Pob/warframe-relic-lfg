@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@million/lint": "^1.0.11",
 		"@nozbe/microfuzz": "^1.0.0",
+		"@tanstack/react-router": "^1.81.14",
 		"@types/react": "^19.0.0-rc.1",
 		"@types/react-dom": "npm:types-react-dom@rc",
 		"react": "^19.0.0-rc-5c56b873-20241107",
@@ -19,6 +20,8 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.13.0",
+		"@tanstack/router-devtools": "^1.81.14",
+		"@tanstack/router-plugin": "^1.81.9",
 		"@vitejs/plugin-react": "^4.3.3",
 		"babel-plugin-react-compiler": "^19.0.0-beta-63b359f-20241101",
 		"eslint": "^9.13.0",
