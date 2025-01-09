@@ -27,13 +27,14 @@ for (let i = 0; i < NUM_USERS; i++) {
 
 for (let i = 0; i < NUM_POSTS; i++) {
 	const addPost = `
-  INSERT INTO posts (post_id, relic, user_id, created_at, open_slots) VALUES ($post_id, $relic, $user_id, $created_at, $open_slots)
+  INSERT INTO posts (post_id, relic, user_id, created_at,updated_at, open_slots) VALUES ($post_id, $relic, $user_id, $created_at, $updated_at, $open_slots)
 `;
 	db.query(addPost).run({
 		post_id: randomUUIDv7(),
 		relic: SAMPLE_RELICS[Math.floor(Math.random() * SAMPLE_RELICS.length)],
 		user_id: USER_IDS[Math.floor(Math.random() * USER_IDS.length)],
 		created_at: Date.now() - 38271,
+		updated_at: Date.now() - 38271,
 		open_slots: Math.floor(Math.random() * 4),
 	});
 }

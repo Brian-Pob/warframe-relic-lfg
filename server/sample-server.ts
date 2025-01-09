@@ -1,4 +1,4 @@
-const server = Bun.serve({
+const sampleServer = Bun.serve({
   async fetch(req) {
     const path = new URL(req.url).pathname;
 
@@ -33,4 +33,4 @@ const server = Bun.serve({
   },
 });
 
-console.log(`Listening on ${server.url}`);
+console.log(`Listening on ${sampleServer.url}`);

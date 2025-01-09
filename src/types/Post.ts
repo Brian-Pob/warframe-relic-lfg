@@ -2,10 +2,10 @@ import type { Relic } from "./Relic";
 import type { User } from "./User";
 
 export type Post = {
-	id: string;
+	post_id: string;
 	relic: Relic;
-	host: User;
-	createdAt: Date;
-	openSlots: number;
-	status: string;
+	user_id: User;
+	created_at: Date;
+	updated_at: Date;
+	open_slots: number;
 };
