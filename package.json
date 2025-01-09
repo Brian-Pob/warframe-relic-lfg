@@ -7,7 +7,10 @@
 		"dev": "vite",
 		"build": "tsc -b && vite build",
 		"lint": "eslint .",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"initdb": "bun run server/initdb.ts",
+		"seed": "bun run server/seed.ts",
+		"seedmany": "bun run server/seedmany.ts"
 	},
 	"dependencies": {
 		"@million/lint": "^1.0.14",
