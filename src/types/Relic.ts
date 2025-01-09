@@ -1,9 +1,9 @@
 export type Relic = {
+	_id: string;
 	tier: string;
 	relicName: string;
 	state: string;
 	rewards: Array<Item>;
-	_id: string;
 };
 
 export type Item = {
