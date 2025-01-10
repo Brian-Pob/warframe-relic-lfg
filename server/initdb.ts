@@ -16,7 +16,7 @@ db.query(createUsers).run();
 const createPosts = `
   CREATE TABLE IF NOT EXISTS posts(
     post_id TEXT PRIMARY KEY,
-    relic TEXT NOT NULL,
+    relic_name TEXT NOT NULL,
     user_id TEXT NOT NULL,
     created_at TEXT NOT NULL,
     updated_at TEXT NOT NULL,
