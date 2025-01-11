@@ -1,4 +1,4 @@
-import { expect, test, describe } from "bun:test";
+import { expect, test, describe, afterAll } from "bun:test";
 import { Database } from "bun:sqlite";
 import type { Post } from "../src/types/Post";
 import type { User } from "../src/types/User";
@@ -202,5 +202,35 @@ describe("delete", () => {
 			.query("SELECT * FROM posts WHERE post_id = $post_id")
 			.get({ $post_id: post_id }) as Post;
 		expect(post).toBeNull();
+	});
+});
+
+describe("injection", () => {
+	afterAll(() => {
+		const deleteUser = `
+			DELETE FROM users WHERE user_id = $user_id;
+		`;
+		db.query(deleteUser).run({ $user_id: 12345 });
+	});
+	test("sql injection attack fails when creating a user", async () => {
+		const user_id = "12345";
+		const username = '" OR "1" = "1';
+		const password = "password";
+		const passwordHash = await Bun.password.hash(password);
+		const addUser = `
+			INSERT INTO users (user_id, username, password) VALUES($user_id, $username, $password);
+		`;
+		db.query(addUser).run({
+			$user_id: user_id,
+			$username: username,
+			$password: passwordHash,
+		});
+
+		const user: User = db
+			.query("SELECT * FROM users WHERE user_id = $user_id")
+			.get({ $user_id: user_id }) as User;
+
+		// If user exists it means injection attack failed
+		expect(user).not.toBeNull();
 	});
 });
