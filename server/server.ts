@@ -1,4 +1,4 @@
-import { Elysia, t } from "elysia";
+import { Elysia } from "elysia";
 import { Database } from "bun:sqlite";
 import { PostModel, type Post } from "../src/types/Post";
 import type { User } from "../src/types/User";
@@ -23,14 +23,29 @@ const app = new Elysia()
 	})
 	.post(
 		"/api/posts",
-		(context) => {
-			console.log(context.body);
+		({ body, error }) => {
+			console.log(body);
+
+			const insertPost = `
+			INSERT INTO posts (post_id, relic_name, user_id, created_at, updated_at, open_slots) VALUES ($post_id, $relic_name, $user_id, $created_at, $updated_at, $open_slots)
+			`;
+			try {
+				db.query(insertPost).run({
+					$post_id: body.post_id,
+					$relic_name: body.relic_name,
+					$user_id: body.user_id,
+					$created_at: body.created_at,
+					$updated_at: body.updated_at,
+					$open_slots: body.open_slots,
+				});
+			} catch (e) {
+				console.error(e);
+				return error(500, e);
+			}
+
+			return body;
 		},
-		// This third parameter is the Lifecycle. Here, we use it for runtime
-		// typesafety.
-		{
-			body: PostModel,
-		},
+		{ body: PostModel },
 	)
 	.get("/api/users", () => {
 		console.log("Getting all users...");

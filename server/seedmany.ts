@@ -41,8 +41,8 @@ for (let i = 0; i < NUM_POSTS; i++) {
 		post_id: randomUUIDv7(),
 		relic_name: SAMPLE_RELICS[Math.floor(Math.random() * SAMPLE_RELICS.length)],
 		user_id: USER_IDS[Math.floor(Math.random() * USER_IDS.length)],
-		created_at: Date.now() - 38271,
-		updated_at: Date.now() - 38271,
+		created_at: Date.now(),
+		updated_at: Date.now(),
 		open_slots: Math.floor(Math.random() * 4),
 	});
 }

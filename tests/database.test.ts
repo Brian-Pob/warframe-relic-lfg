@@ -7,12 +7,12 @@ const db = new Database("database.sqlite");
 db.query("PRAGMA foreign_keys = ON").run();
 
 const SAMPLE_POST_DATA: Post = {
-	post_id: "01945910-044c-7000-ac58-c2e5938aa2b2",
-	relic_name: "Axi A1 Radiant",
-	created_at: new Date(1736660971213),
-	updated_at: new Date(1736660971213),
-	open_slots: 2,
-	user_id: "01945910-0335-7000-b541-9922906fce70",
+	post_id: "0194599d-8706-7000-9f85-f6604cbd9efb",
+	relic_name: "Meso M4 Exceptional",
+	created_at: 1736670245255,
+	updated_at: 1736670245255,
+	open_slots: 3,
+	user_id: "0194599d-8684-7000-b810-f539cd0c473f",
 };
 const USER_ID = SAMPLE_POST_DATA.user_id;
 const USERNAME = USER_ID.split("-")[3];
