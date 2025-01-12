@@ -1,6 +1,7 @@
 import { Database } from "bun:sqlite";
 import { randomUUIDv7 } from "bun";
 const db = new Database("database.sqlite", { strict: true });
+db.query("PRAGMA foreign_keys = ON").run();
 
 const NUM_USERS = 5;
 const NUM_POSTS = 3;
@@ -12,6 +13,7 @@ const SAMPLE_RELICS = [
 	"Neo B3 Flawless",
 ];
 
+// Adding users
 for (let i = 0; i < NUM_USERS; i++) {
 	const user_id = randomUUIDv7();
 	USER_IDS.push(user_id);
@@ -30,6 +32,7 @@ for (let i = 0; i < NUM_USERS; i++) {
 	});
 }
 
+// Adding posts
 for (let i = 0; i < NUM_POSTS; i++) {
 	const addPost = `
   INSERT INTO posts (post_id, relic_name, user_id, created_at,updated_at, open_slots) VALUES ($post_id, $relic_name, $user_id, $created_at, $updated_at, $open_slots)
@@ -43,3 +46,6 @@ for (let i = 0; i < NUM_POSTS; i++) {
 		open_slots: Math.floor(Math.random() * 4),
 	});
 }
+
+console.log(db.query("SELECT * FROM users").get());
+console.log(db.query("SELECT * FROM posts").get());

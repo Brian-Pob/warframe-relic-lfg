@@ -4,27 +4,32 @@ import type { Post } from "../src/types/Post";
 import type { User } from "../src/types/User";
 
 const db = new Database("database.sqlite");
+db.query("PRAGMA foreign_keys = ON").run();
 
-const USER_ID = "0194504a-d742-7000-90af-d40c7b03eb8e";
+const SAMPLE_POST_DATA: Post = {
+	post_id: "01945910-044c-7000-ac58-c2e5938aa2b2",
+	relic_name: "Axi A1 Radiant",
+	created_at: new Date(1736660971213),
+	updated_at: new Date(1736660971213),
+	open_slots: 2,
+	user_id: "01945910-0335-7000-b541-9922906fce70",
+};
+const USER_ID = SAMPLE_POST_DATA.user_id;
 const USERNAME = USER_ID.split("-")[3];
-const POST_ID = "0194504a-d7fc-7000-8db1-f4074499f1a6";
-const RELIC_NAME = "Meso M4 Exceptional";
+const POST_ID = SAMPLE_POST_DATA.post_id;
+const RELIC_NAME = SAMPLE_POST_DATA.relic_name;
 
 describe("read", () => {
 	test("get all posts", () => {
 		const allPosts: Post[] = db.query("SELECT * FROM posts").all() as Post[];
 		expect(allPosts).toBeDefined();
 		expect(allPosts.length).toBeGreaterThan(0);
-
-		// console.log(allPosts);
 	});
 
 	test("get all users", () => {
 		const allUsers: User[] = db.query("SELECT * FROM users").all() as User[];
 		expect(allUsers).toBeDefined();
 		expect(allUsers.length).toBeGreaterThan(0);
-
-		// console.log(allUsers);
 	});
 
 	test("get specific user", async () => {
@@ -115,10 +120,48 @@ describe("write", () => {
 		expect(post.relic_name).toBe(relic_name);
 		expect(post.user_id).toBe(user_id);
 
-		// Date is stored as string in sqlite
+		// Date is stored as number in sqlite
 		expect(Number(post.created_at)).toBe(created_at);
 		expect(Number(post.updated_at)).toBe(updated_at);
 		expect(post.open_slots).toBe(open_slots);
+	});
+
+	test("cannot add post with nonexistent user", () => {
+		const failing_post_id = Bun.randomUUIDv7();
+		const relic_name = RELIC_NAME;
+		const user_id = "12345";
+		const created_at = Date.now();
+		const updated_at = Date.now();
+		const open_slots = 3;
+
+		const addPost = `
+		INSERT INTO posts (post_id, relic_name, user_id, created_at, updated_at, open_slots) VALUES ($post_id, $relic_name, $user_id, $created_at, $updated_at, $open_slots)
+	`;
+		try {
+			db.query(addPost).run({
+				$post_id: failing_post_id,
+				$relic_name: relic_name,
+				$user_id: user_id,
+				$created_at: created_at,
+				$updated_at: updated_at,
+				$open_slots: open_slots,
+			});
+
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		} catch (error) {
+			console.log("Foreign key constraint enforced when adding post.");
+		}
+
+		const post: Post = db
+			.query("SELECT * FROM posts WHERE post_id = $post_id")
+			.get({ $post_id: failing_post_id }) as Post;
+		expect(post).toBeNull();
+
+		if (post) {
+			db.query("DELETE FROM posts WHERE post_id = $post_id").run({
+				$post_id: failing_post_id,
+			});
+		}
 	});
 });
 
@@ -170,8 +213,6 @@ describe("update", () => {
 		expect(user.user_id).toBe(user_id);
 		expect(user.username).toBe(username);
 		expect(user.password).toBe(passwordHash);
-
-		console.log(user);
 	});
 });
 
