@@ -14,11 +14,13 @@
 		"seedmany": "bun run server/seedmany.ts"
 	},
 	"dependencies": {
+		"@elysiajs/html": "^1.2.0",
 		"@million/lint": "^1.0.14",
 		"@nozbe/microfuzz": "^1.0.0",
 		"@types/bun": "^1.1.15",
 		"@types/react": "^19.0.0-rc.1",
 		"@types/react-dom": "npm:types-react-dom@rc",
+		"elysia": "^1.2.10",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0"
 	},
