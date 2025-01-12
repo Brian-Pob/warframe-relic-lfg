@@ -16,11 +16,11 @@ db.query(addUser).run({
 });
 
 const addPost = `
-  INSERT INTO posts (post_id, relic, user_id, created_at, updated_at open_slots) VALUES ($post_id, $relic, $user_id, $created_at, $updated_at, $open_slots)
+  INSERT INTO posts (post_id, relic_name, user_id, created_at, updated_at open_slots) VALUES ($post_id, $relic_name, $user_id, $created_at, $updated_at, $open_slots)
 `;
 db.query(addPost).run({
 	post_id: randomUUIDv7(),
-	relic: "Axi A1 Radiant",
+	relic_name: "Axi A1 Radiant",
 	user_id: user_id,
 	created_at: Date.now(),
 	updated_at: Date.now(),
