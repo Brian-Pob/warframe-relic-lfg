@@ -1,10 +1,7 @@
-import { Database } from "bun:sqlite";
-const db = new Database("database.sqlite", { create: true });
+import db from "./db";
 
-db.query("DROP TABLE IF EXISTS users").run();
 db.query("DROP TABLE IF EXISTS posts").run();
-
-db.query("PRAGMA foreign_keys = ON").run();
+db.query("DROP TABLE IF EXISTS users").run();
 
 const createUsers = `
   CREATE TABLE IF NOT EXISTS users(

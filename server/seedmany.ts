@@ -1,7 +1,5 @@
-import { Database } from "bun:sqlite";
 import { randomUUIDv7 } from "bun";
-const db = new Database("database.sqlite", { strict: true });
-db.query("PRAGMA foreign_keys = ON").run();
+import db from "./db";
 
 const NUM_USERS = 5;
 const NUM_POSTS = 3;
