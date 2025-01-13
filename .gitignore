@@ -27,3 +27,4 @@ dist-ssr
 .million
 
 *.sqlite
+tests/sample_post.json
