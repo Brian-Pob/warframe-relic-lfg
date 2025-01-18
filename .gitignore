@@ -26,5 +26,5 @@ dist-ssr
 # Million Lint
 .million
 
-*.sqlite
+*.sqlite*
 tests/sample_post.json
