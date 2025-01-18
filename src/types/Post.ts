@@ -2,7 +2,7 @@ import { t } from "elysia";
 
 export const PostModel = t.Object({
 	post_id: t.String(),
-	relic_name: t.String(),
+	relic_id: t.String(),
 	user_id: t.String(),
 	created_at: t.Number(),
 	updated_at: t.Number(),
