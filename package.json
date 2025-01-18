@@ -13,7 +13,8 @@
     "initdb": "bun run src/server/initdb.ts",
     "seed": "bun run src/server/seed.ts",
     "seedmany": "bun run src/server/seedmany.ts",
-    "initandseed": "bun initdb && bun seedmany"
+    "initandseed": "bun initdb && bun seedmany",
+    "relics": "bun run src/server/convert_relics.ts"
   },
   "dependencies": {
     "@elysiajs/html": "^1.2.0",
