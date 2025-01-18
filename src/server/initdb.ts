@@ -2,9 +2,9 @@ import db from "./db";
 
 db.query("DROP TABLE IF EXISTS posts").run();
 db.query("DROP TABLE IF EXISTS users").run();
+// Does not drop relics table because it's costly to recreate
 db.query("DROP TABLE IF EXISTS rewards").run();
 db.query("DROP TABLE IF EXISTS items").run();
-db.query("DROP TABLE IF EXISTS relics").run();
 
 const createUsers = `
   CREATE TABLE IF NOT EXISTS users(
