@@ -1,6 +1,6 @@
 import { Elysia } from "elysia";
-import { PostModel, type Post } from "../src/types/Post";
-import { UserModel, type User } from "../src/types/User";
+import { PostModel, type Post } from "@/types/Post";
+import { UserModel, type User } from "@/types/User";
 import db from "./db";
 
 const app = new Elysia()
