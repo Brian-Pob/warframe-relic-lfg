@@ -11,7 +11,7 @@ const insertData = (db: Database, relics: any[]) => {
 	for (const relic of relics) {
 		// Insert relic
 		db.run(
-			"INSERT OR IGNORE INTO relics (id, tier, relicName, state) VALUES (?, ?, ?, ?)",
+			"INSERT OR IGNORE INTO relics (id, tier, relic_name, state) VALUES (?, ?, ?, ?)",
 			[relic._id, relic.tier, relic.relicName, relic.state],
 		);
 	}
@@ -19,7 +19,7 @@ const insertData = (db: Database, relics: any[]) => {
 	for (const relic of relics) {
 		for (const reward of relic.rewards) {
 			// Insert item
-			db.run("INSERT OR IGNORE INTO items (id, itemName) VALUES (?, ?)", [
+			db.run("INSERT OR IGNORE INTO items (id, item_name) VALUES (?, ?)", [
 				reward._id,
 				reward.itemName,
 			]);
