@@ -1,14 +1,14 @@
 export type Relic = {
 	_id: string;
 	tier: string;
-	relicName: string;
+	relic_name: string;
 	state: string;
 	rewards: Array<Item>;
 };
 
 export type Item = {
 	_id: string;
-	itemName: string;
+	item_name: string;
 	rarity: string;
 	chance: number;
 };

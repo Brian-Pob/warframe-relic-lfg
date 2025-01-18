@@ -45,9 +45,11 @@ for (let i = 0; i < NUM_POSTS; i++) {
   });
 }
 
-console.log(db.query("SELECT * FROM users").get());
+// console.log(db.query("SELECT * FROM users").get());
+const sampleOutputDir = "./tests/sample_post.json";
+console.log("Created sample data in", sampleOutputDir);
 console.log(db.query("SELECT * FROM posts").get());
 await Bun.write(
-  "./tests/sample_post.json",
+  sampleOutputDir,
   JSON.stringify(db.query("SELECT * FROM posts").get()),
 );

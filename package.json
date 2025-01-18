@@ -5,15 +5,18 @@
   "type": "module",
   "scripts": {
     "dev:ui": "vite",
-    "dev:serve": "bun run --watch server/server.ts",
+    "dev:serve": "bun run --watch src/server/server.ts",
     "dev": "concurrently \"bun run dev:ui\" \"bun run dev:serve\"",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "initdb": "bun run server/initdb.ts",
-    "seed": "bun run server/seed.ts",
-    "seedmany": "bun run server/seedmany.ts",
-    "initandseed": "bun initdb && bun seedmany"
+    "initdb": "bun run src/server/initdb.ts",
+    "seed": "bun run src/server/seed.ts",
+    "seedmany": "bun run src/server/seedmany.ts",
+    "initdb:full": "bun initdb && bun seedmany",
+    "initdb:relics": "bun run src/server/init_relics.ts",
+    "convert_relics": "bun run src/server/convert_relics.ts",
+    "initdb:relics:full": "bun initdb:relics && bun convert_relics"
   },
   "dependencies": {
     "@elysiajs/html": "^1.2.0",
