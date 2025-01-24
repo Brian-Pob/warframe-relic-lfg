@@ -140,6 +140,6 @@ const app = new Elysia()
       return "Invalid route - ≽^╥⩊╥^≼";
     }
   })
-  .listen(8080);
+  .listen(5174);
 
 console.log(`🦊 Elysia is running at on port ${app.server?.port}...`);

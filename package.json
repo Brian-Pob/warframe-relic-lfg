@@ -1,50 +1,53 @@
 {
-	"name": "warframe-relic-lfg",
-	"private": true,
-	"version": "0.0.0",
-	"type": "module",
-	"scripts": {
-		"dev:ui": "vite",
-		"dev:serve": "bun run --watch src/server/server.ts",
-		"dev": "concurrently \"bun run dev:ui\" \"bun run dev:serve\"",
-		"build": "tsc -b && vite build",
-		"lint": "eslint .",
-		"preview": "vite preview",
-		"initdb:main": "bun run src/server/init_db_main.ts",
-		"initdb:relics": "bun run src/server/init_db_relics.ts",
-		"convert_relics": "bun run src/server/convert_relics.ts",
-		"seed": "bun run src/server/seed.ts",
-		"initdb:full": "bun initdb:relics && bun convert_relics && bun initdb:main && bun seed",
-		"initdb:main:full": "bun initdb:main && bun seed",
-		"initdb:relics:full": "bun initdb:relics && bun convert_relics"
-	},
-	"dependencies": {
-		"@elysiajs/html": "^1.2.0",
-		"@million/lint": "^1.0.14",
-		"@nozbe/microfuzz": "^1.0.0",
-		"@types/bun": "^1.1.15",
-		"@types/react": "^19.0.0-rc.1",
-		"@types/react-dom": "npm:types-react-dom@rc",
-		"elysia": "^1.2.10",
-		"react": "^19.0.0",
-		"react-dom": "^19.0.0"
-	},
-	"devDependencies": {
-		"@eslint/js": "^9.17.0",
-		"@vitejs/plugin-react": "^4.3.4",
-		"babel-plugin-react-compiler": "^19.0.0-beta-df7b47d-20241124",
-		"concurrently": "^9.1.2",
-		"eslint": "^9.17.0",
-		"eslint-plugin-react-compiler": "^19.0.0-beta-df7b47d-20241124",
-		"eslint-plugin-react-hooks": "^5.1.0",
-		"eslint-plugin-react-refresh": "^0.4.16",
-		"globals": "^15.14.0",
-		"typescript": "~5.6.3",
-		"typescript-eslint": "^8.19.1",
-		"vite": "^5.4.11"
-	},
-	"overrides": {
-		"@types/react": "npm:types-react@rc",
-		"@types/react-dom": "npm:types-react-dom@rc"
-	}
+  "name": "warframe-relic-lfg",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev:ui": "vite",
+    "dev:serve": "bun run --watch src/server/server.ts",
+    "dev": "concurrently \"bun run dev:ui\" \"bun run dev:serve\"",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "initdb:main": "bun run src/server/init_db_main.ts",
+    "initdb:relics": "bun run src/server/init_db_relics.ts",
+    "convert_relics": "bun run src/server/convert_relics.ts",
+    "seed": "bun run src/server/seed.ts",
+    "initdb:full": "bun initdb:relics && bun convert_relics && bun initdb:main && bun seed",
+    "initdb:main:full": "bun initdb:main && bun seed",
+    "initdb:relics:full": "bun initdb:relics && bun convert_relics"
+  },
+  "dependencies": {
+    "@elysiajs/html": "^1.2.0",
+    "@million/lint": "^1.0.14",
+    "@nozbe/microfuzz": "^1.0.0",
+    "@tanstack/react-router": "^1.97.14",
+    "@tanstack/router-devtools": "^1.97.14",
+    "@types/bun": "^1.1.15",
+    "elysia": "^1.2.10",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@tanstack/router-plugin": "^1.97.14",
+    "@types/react": "^19.0.0-rc.1",
+    "@types/react-dom": "^19.0.0-rc.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "babel-plugin-react-compiler": "^19.0.0-beta-df7b47d-20241124",
+    "concurrently": "^9.1.2",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-compiler": "^19.0.0-beta-df7b47d-20241124",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "typescript": "~5.6.3",
+    "typescript-eslint": "^8.19.1",
+    "vite": "^5.4.11"
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@rc",
+    "@types/react-dom": "npm:types-react-dom@rc"
+  }
 }
