@@ -65,6 +65,27 @@ describe("read", () => {
 		expect(post.open_slots).toBeGreaterThanOrEqual(0);
 		expect(post.open_slots).toBeLessThanOrEqual(3);
 	});
+
+	test("search posts by relic id", () => {
+		const relic_id = SAMPLE_POST_DATA.relic_id;
+		const searchPosts = `
+			SELECT * FROM posts WHERE relic_id = $relic_id;
+		`;
+		const posts: Post[] = db.query(searchPosts).all({ $relic_id: relic_id }) as Post[];
+		expect(posts).toBeDefined();
+		expect(posts.length).toBeGreaterThan(0);
+		expect(posts.some((post) => post.relic_id === relic_id)).toBe(true);
+	});
+
+	test("search posts by non-existent relic id", () => {
+		const relic_id = "non-existent-relic-id";
+		const searchPosts = `
+			SELECT * FROM posts WHERE relic_id = $relic_id;
+		`;
+		const posts: Post[] = db.query(searchPosts).all({ $relic_id: relic_id }) as Post[];
+		expect(posts).toBeDefined();
+		expect(posts.length).toBe(0);
+	});
 });
 
 const NEW_USER_ID = Bun.randomUUIDv7();
