@@ -35,13 +35,14 @@ const app = new Elysia()
       const insertPost = `
 			INSERT INTO posts (post_id, relic_id, user_id, created_at, updated_at, open_slots) VALUES ($post_id, $relic_id, $user_id, $created_at, $updated_at, $open_slots)
 			`;
+      const now = Date.now();
       try {
         db.query(insertPost).run({
           post_id: body.post_id,
           relic_id: body.relic_id,
           user_id: body.user_id,
-          created_at: body.created_at,
-          updated_at: body.updated_at,
+          created_at: now,
+          updated_at: now,
           open_slots: body.open_slots,
         });
       } catch (e) {
@@ -61,10 +62,11 @@ const app = new Elysia()
       const updatePost = `
 			UPDATE posts SET relic_id = $relic_id, updated_at = $updated_at, open_slots = $open_slots WHERE post_id = $post_id
 			`;
+      const now = Date.now();
       try {
         db.query(updatePost).run({
           relic_id: body.relic_id,
-          updated_at: body.updated_at,
+          updated_at: now,
           open_slots: body.open_slots,
           post_id: body.post_id,
         });
