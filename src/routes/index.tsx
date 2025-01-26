@@ -24,7 +24,7 @@ function App() {
   const deferredSearchInput = useDeferredValue(searchInput);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedRelicsDisplayCount, setSelectedRelicsDisplayCount] =
-    useState("10");
+    useState("10"); // Consider moving this to query params
 
   // Memoized fetch function
   const fetchRelics = useCallback(async () => {
