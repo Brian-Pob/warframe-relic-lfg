@@ -3,7 +3,7 @@ import { PostModel, type Post } from "@/types/Post";
 import { UserModel, type User } from "@/types/User";
 import db from "./db";
 
-const app = new Elysia()
+export const app = new Elysia()
   .get("/api", () => "Welcome to the Warframe Relic LFG API")
   .get(
     "/api/posts",
@@ -167,6 +167,6 @@ const app = new Elysia()
       return "Invalid route - ≽^╥⩊╥^≼";
     }
   })
-  .listen(5174);
+  .listen(Bun.env.SERVER_PORT ?? 5174);
 
-console.log(`🦊 Elysia is running at on port ${app.server?.port}...`);
+console.log(`🦊 Elysia is running on port ${app.server?.port}...`);

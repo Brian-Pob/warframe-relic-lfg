@@ -1,6 +1,6 @@
 import { expect, test, describe } from "bun:test";
 import { PostModel } from "../src/types/Post";
-import app from "../src/server/server";
+import { app } from "../src/server/server";
 import { Value } from "@sinclair/typebox/value";
 
 describe("Elysia server", () => {
