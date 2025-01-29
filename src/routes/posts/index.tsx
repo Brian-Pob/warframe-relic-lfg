@@ -1,10 +1,10 @@
-import type { Post } from "@/types/Post";
-import { minutesSince } from "@/utils/minutesSince";
-import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useEffect, useState } from "react";
-export const Route = createFileRoute("/posts")({
+import type { Post } from '@/types/Post'
+import { minutesSince } from '@/utils/minutesSince'
+import { createFileRoute } from '@tanstack/react-router'
+import { useCallback, useEffect, useState } from 'react'
+export const Route = createFileRoute('/posts/')({
   component: App,
-});
+})
 
 function App() {
   // Make get request to /api/posts
@@ -12,32 +12,32 @@ function App() {
   //
   const [posts, setPosts] = useState<
     (Post & {
-      tier: string;
-      relic_name: string;
-      username: string;
+      tier: string
+      relic_name: string
+      username: string
     })[]
-  >([]);
+  >([])
 
   const fetchPosts = useCallback(async () => {
     try {
-      const response = await fetch("/api/posts");
+      const response = await fetch('/api/posts')
       if (!response.ok) {
-        throw new Error(`Response status ${response.status}`);
+        throw new Error(`Response status ${response.status}`)
       }
-      const postsJson = await response.json();
-      console.log(postsJson);
-      setPosts(postsJson);
+      const postsJson = await response.json()
+      console.log(postsJson)
+      setPosts(postsJson)
     } catch (error) {
-      console.error("Error fetching posts:", error);
+      console.error('Error fetching posts:', error)
     } finally {
       // setIsLoading(false)
-      console.log("Posts fetched");
+      console.log('Posts fetched')
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    fetchPosts();
-  }, [fetchPosts]);
+    fetchPosts()
+  }, [fetchPosts])
   return (
     <main>
       <h1 id="title">Warframe Relic LFG Active Posts</h1>
@@ -88,7 +88,7 @@ function App() {
         <hr />
       </div>
     </main>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,0 +1,7 @@
+@scope {
+  :scope {
+    display: flex;
+    justify-content: end;
+    gap: var(--size-2);
+  }
+}
