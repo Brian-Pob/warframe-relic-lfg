@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import React, {
+import {
   useDeferredValue,
   useEffect,
   useState,
   useCallback,
   useMemo,
+  type ChangeEvent,
+  memo,
 } from "react";
 import { useFuzzySearchList } from "@nozbe/microfuzz/react";
 import type { Relic, Item } from "@/types/Relic";
@@ -16,7 +18,7 @@ export const Route = createFileRoute("/")({
 
 import "@/App.css";
 
-const MemoizedRelicTable = React.memo(RelicTable);
+const MemoizedRelicTable = memo(RelicTable);
 
 function App() {
   const [relicData, setRelicData] = useState<Relic[]>([]);
@@ -78,9 +80,7 @@ function App() {
 
   // Debounced search input handler
   const handleSearchChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchInput(e.target.value);
-    },
+    (e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value),
     [],
   );
 
@@ -88,13 +88,12 @@ function App() {
     if (deferredSearchInput.length < 2) {
       return [];
     }
+    const count =
+      selectedRelicsDisplayCount === "all"
+        ? filteredRelicsList.length
+        : Number.parseInt(selectedRelicsDisplayCount);
 
-    if (selectedRelicsDisplayCount === "all") {
-      return filteredRelicsList.map(({ item }) => item);
-    }
-    return filteredRelicsList
-      .slice(0, Number.parseInt(selectedRelicsDisplayCount))
-      .map(({ item }) => item);
+    return filteredRelicsList.slice(0, count).map(({ item }) => item);
   }, [filteredRelicsList, selectedRelicsDisplayCount, deferredSearchInput]);
 
   return (
@@ -102,11 +101,7 @@ function App() {
       <h1 id="title">Warframe Relic LFG</h1>
 
       <div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
+        <form onSubmit={(e) => e.preventDefault()}>
           <div>
             <label htmlFor="search">
               Search
@@ -128,9 +123,7 @@ function App() {
               name="relicsDisplayCount"
               id="relicsDisplayCount"
               value={selectedRelicsDisplayCount}
-              onChange={(e) => {
-                setSelectedRelicsDisplayCount(e.target.value);
-              }}
+              onChange={(e) => setSelectedRelicsDisplayCount(e.target.value)}
             >
               <option value="10">10</option>
               <option value="20">20</option>
