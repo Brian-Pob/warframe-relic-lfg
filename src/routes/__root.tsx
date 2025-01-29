@@ -1,7 +1,8 @@
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import css from "./__root.css?raw";
-
+import { Logo } from "@/components/Logo";
+import Scoper from "@/components/Scoper";
 export const Route = createRootRoute({
   component: RootComponent,
 });
@@ -9,8 +10,8 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <>
+      <Scoper style={css} />
       <nav className="">
-        <style>{css}</style>
         <Link
           to="/"
           activeProps={{
@@ -18,18 +19,28 @@ function RootComponent() {
           }}
           activeOptions={{ exact: true }}
         >
-          Home
-        </Link>{" "}
-        <Link
-          to="/posts"
-          activeProps={{
-            className: "",
-          }}
-        >
-          Posts
+          <Logo />
         </Link>
+        <div>
+          <Link
+            to="/"
+            activeProps={{
+              className: "",
+            }}
+            activeOptions={{ exact: true }}
+          >
+            Home
+          </Link>
+          <Link
+            to="/posts"
+            activeProps={{
+              className: "",
+            }}
+          >
+            Posts
+          </Link>
+        </div>
       </nav>
-      <hr />
       <Outlet />
       <TanStackRouterDevtools position="bottom-right" />
     </>
