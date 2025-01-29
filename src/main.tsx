@@ -1,16 +1,24 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom/client";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { routeTree } from "./routeTree.gen";
 import "./index.css";
-import App from "./App.microfuzz.tsx";
+// Set up a Router instance
+const router = createRouter({
+  routeTree,
+  defaultPreload: "intent",
+});
 
-const root = document.getElementById("root");
+// Register things for typesafety
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}
 
-if (root) {
-	createRoot(root).render(
-		<StrictMode>
-			<App />
-		</StrictMode>,
-	);
-} else {
-	console.error("Root element not found");
+// biome-ignore lint/style/noNonNullAssertion: <explanation>
+const rootElement = document.getElementById("root")!;
+
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(<RouterProvider router={router} />);
 }
