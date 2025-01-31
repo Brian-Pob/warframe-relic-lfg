@@ -65,7 +65,7 @@ function App() {
           </label>
         </form>
       </div>
-      <table>
+      <table className="results-grid">
         <thead>
           <tr>
             <th>Relic Name</th>
