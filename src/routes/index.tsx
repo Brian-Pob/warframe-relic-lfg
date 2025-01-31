@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useDeferredValue, useState, useCallback, memo } from "react";
 import RelicTable from "@/components/RelicTable";
-import useFetchRelics from "@/hooks/useFetchRelics"; // Adjust the path as necessary
-import useFilterRelics from "@/hooks/useFilterRelics"; // Adjust the path as necessary
+import useFetchRelics from "@/hooks/useFetchRelics";
+import useFilterRelics from "@/hooks/useFilterRelics";
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -17,7 +17,7 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const deferredSearchInput = useDeferredValue(searchInput);
   const [selectedRelicsDisplayCount, setSelectedRelicsDisplayCount] =
-    useState("10"); // Consider moving this to query params
+    useState("10");
 
   // Use the filterRelics function to get the filtered relic table data
   const relicTableData = useFilterRelics(relicData, deferredSearchInput);
