@@ -19,8 +19,8 @@ function App() {
   const [selectedRelicsDisplayCount, setSelectedRelicsDisplayCount] =
     useState("10");
 
-  // Use the filterRelics function to get the filtered relic table data
-  const relicTableData = useFilterRelics(relicData, deferredSearchInput);
+  // Use the filterRelics function to filter relics by search input,
+  const filteredRelics = useFilterRelics(relicData, deferredSearchInput);
 
   // Debounced search input handler
   const handleSearchChange = useCallback(
@@ -31,7 +31,6 @@ function App() {
   return (
     <main>
       <h1 id="title">Warframe Relic LFG</h1>
-
       <div>
         <form onSubmit={(e) => e.preventDefault()}>
           <div>
@@ -46,14 +45,14 @@ function App() {
               />
             </label>
             {deferredSearchInput.length >= 2 && (
-              <span>Found {relicTableData.length} relics</span>
+              <span>Found {filteredRelics.length} relics</span>
             )}
           </div>
-          <label htmlFor="relicsDisplayCount">
+          <label htmlFor="relics-display-count">
             Relics to display
             <select
-              name="relicsDisplayCount"
-              id="relicsDisplayCount"
+              name="relics-display-count"
+              id="relics-display-count"
               value={selectedRelicsDisplayCount}
               onChange={(e) => setSelectedRelicsDisplayCount(e.target.value)}
             >
@@ -76,7 +75,12 @@ function App() {
         <tbody>
           {!isLoading && (
             <MemoizedRelicTable
-              relicData={relicTableData}
+              relicData={filteredRelics.slice(
+                0,
+                selectedRelicsDisplayCount === "all"
+                  ? relicData.length
+                  : Number.parseInt(selectedRelicsDisplayCount),
+              )}
               searchInput={deferredSearchInput}
             />
           )}
