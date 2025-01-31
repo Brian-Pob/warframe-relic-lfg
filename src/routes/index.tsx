@@ -1,16 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  useDeferredValue,
-  useEffect,
-  useState,
-  useCallback,
-  useMemo,
-  type ChangeEvent,
-  memo,
-} from "react";
-import { useFuzzySearchList } from "@nozbe/microfuzz/react";
-import type { Relic, Item } from "@/types/Relic";
+import { useDeferredValue, useState, useCallback, memo } from "react";
 import RelicTable from "@/components/RelicTable";
+import useFetchRelics from "@/hooks/useFetchRelics"; // Adjust the path as necessary
+import useFilterRelics from "@/hooks/useFilterRelics"; // Adjust the path as necessary
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -21,80 +13,20 @@ import "@/App.css";
 const MemoizedRelicTable = memo(RelicTable);
 
 function App() {
-  const [relicData, setRelicData] = useState<Relic[]>([]);
+  const { relicData, isLoading } = useFetchRelics();
   const [searchInput, setSearchInput] = useState("");
   const deferredSearchInput = useDeferredValue(searchInput);
-  const [isLoading, setIsLoading] = useState(true);
   const [selectedRelicsDisplayCount, setSelectedRelicsDisplayCount] =
     useState("10"); // Consider moving this to query params
 
-  // Memoized fetch function
-  const fetchRelics = useCallback(async () => {
-    try {
-      const localRelics = localStorage.getItem("relics");
-      if (localRelics) {
-        setRelicData(JSON.parse(localRelics));
-        setIsLoading(false);
-        return;
-      }
-
-      const response = await fetch(
-        "https://drops.warframestat.us/data/relics.json",
-      );
-      if (!response.ok) {
-        throw new Error(`Response status ${response.status}`);
-      }
-      const { relics: relicsJson } = await response.json();
-
-      localStorage.setItem(
-        "relics",
-        JSON.stringify(relicsJson)
-          .replaceAll("itemName", "item_name")
-          .replaceAll("relicName", "relic_name"),
-      );
-      setRelicData(relicsJson);
-    } catch (error) {
-      console.error("Error fetching relics:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchRelics();
-  }, [fetchRelics]);
-
-  const filteredRelicsList = useFuzzySearchList({
-    list: relicData.filter((relic) => relic.state === "Intact"),
-    queryText: deferredSearchInput,
-    getText: (relic) => [
-      `${relic.relic_name} ${relic.tier}`,
-      relic.rewards.map((reward: Item) => reward.item_name).join(","),
-    ],
-    mapResultItem: ({ item, matches: [highlightRanges] }) => ({
-      item,
-      highlightRanges,
-    }),
-    strategy: "off",
-  });
+  // Use the filterRelics function to get the filtered relic table data
+  const relicTableData = useFilterRelics(relicData, deferredSearchInput);
 
   // Debounced search input handler
   const handleSearchChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value),
+    (e: React.ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value),
     [],
   );
-
-  const relicTableData = useMemo(() => {
-    if (deferredSearchInput.length < 2) {
-      return [];
-    }
-    const count =
-      selectedRelicsDisplayCount === "all"
-        ? filteredRelicsList.length
-        : Number.parseInt(selectedRelicsDisplayCount);
-
-    return filteredRelicsList.slice(0, count).map(({ item }) => item);
-  }, [filteredRelicsList, selectedRelicsDisplayCount, deferredSearchInput]);
 
   return (
     <main>
@@ -114,7 +46,7 @@ function App() {
               />
             </label>
             {deferredSearchInput.length >= 2 && (
-              <span>Found {filteredRelicsList.length} relics</span>
+              <span>Found {relicTableData.length} relics</span>
             )}
           </div>
           <label htmlFor="relicsDisplayCount">

@@ -36,6 +36,7 @@ const RelicRow = memo(
   ({
     relic,
     searchInput,
+    // index, // uncomment to use the index
   }: { relic: Relic; index: number; searchInput: string }) => (
     <tr>
       <td>{relic.relic_name}</td>

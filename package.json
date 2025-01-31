@@ -7,9 +7,9 @@
     "dev:ui": "bun run --bun vite",
     "dev:serve": "bun run --watch src/server/server.ts",
     "dev": "concurrently \"bun run dev:ui\" \"bun run dev:serve\"",
-    "build": "tsc -b && vite build",
+    "build:ui": "tsc -b && bun run --bun vite build",
     "lint": "eslint .",
-    "preview": "bun run --bun vite preview",
+    "preview:ui": "bun run --bun vite preview",
     "initdb:main": "bun run src/server/init_db_main.ts",
     "initdb:relics": "bun run src/server/init_db_relics.ts",
     "convert_relics": "bun run src/server/convert_relics.ts",
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@elysiajs/html": "^1.2.0",
+    "@fontsource/inter": "^5.1.1",
     "@million/lint": "^1.0.14",
     "@nozbe/microfuzz": "^1.0.0",
     "@sinclair/typebox": "^0.34.14",
@@ -27,6 +28,7 @@
     "@tanstack/router-devtools": "^1.97.14",
     "@types/bun": "^1.1.15",
     "elysia": "^1.2.10",
+    "open-props": "^1.7.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
