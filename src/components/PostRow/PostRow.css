@@ -4,39 +4,37 @@
 
 .inv-btn {
   padding: var(--size-1) var(--size-2);
-
   width: min(7rem, 100%);
-}
-
-:has(> .inv-btn) {
   display: flex;
   position: relative;
   justify-content: center;
   align-items: center;
+
+  @media (width < 640px) {
+    padding: var(--size-1);
+  }
 }
 
+
 .inv-btn__tooltip {
-  display: flex;
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   left: 105%;
-  width: fit-content;
+  min-width: max-content;
   height: 2rem;
   padding: var(--size-2);
   background-color: rgba(0, 0, 0);
   color: white;
   text-align: center;
-  border-radius: var(--radius-4);
-  justify-content: center;
-  align-items: center;
+  border-radius: var(--radius-round);
   pointer-events: none;
 
-  @media (640px <=width < 1000px) {
-    left: 40%;
-    bottom: 100%;
-  }
-
-  @media (width < 640px) {
-    display: none;
+  @media (width < 1000px) {
+    left: 50%;
+    translate: -50%;
+    bottom: 120%;
   }
 }
 

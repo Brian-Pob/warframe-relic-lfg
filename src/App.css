@@ -101,6 +101,10 @@ li {
   font-size: xx-large;
 }
 
+h1 {
+  font-size: var(--font-size-fluid-3);
+}
+
 /* To make sure the <style> tag is hidden when using @scope */
 /* Lmao this is so scuffed */
 style {

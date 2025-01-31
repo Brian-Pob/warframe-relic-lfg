@@ -66,12 +66,12 @@ export default function PostRow({
           className="inv-btn"
         >
           {isOpen ? "Close" : "Get Inv."}
-        </button>
         {tooltipVisible && (
           <span className="inv-btn__tooltip" data-visible={tooltipVisible}>
             Copied!
           </span>
         )}
+        </button>
       </div>
     </li>
   );

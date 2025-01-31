@@ -9,6 +9,7 @@
 }
 
 .results-grid {
+  font-size: var(--font-size-fluid-0);
   list-style: none;
   padding-inline-start: 0;
   display: grid;
@@ -42,5 +43,9 @@
 
   &:first-child {
     padding-inline-start: var(--size-3);
+  }
+
+  > p {
+    font-size: inherit;
   }
 }
