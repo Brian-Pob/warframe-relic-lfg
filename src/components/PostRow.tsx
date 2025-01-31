@@ -38,15 +38,21 @@ export default function PostRow({
         </div>
       ) : (
         <>
-          <span>{`${post.tier} ${post.relic_name}`}</span>
-          <span className="_text-right">{post.open_slots}</span>
-          <span className="minutes-since">
-            {minutesSince(post.updated_at)} mins ago
+          <span>
+            <p>{`${post.tier} ${post.relic_name}`}</p>
           </span>
-          <span>{post.username}</span>{" "}
+          <span className="_justify-right">
+            <p className="_text-right">{post.open_slots}</p>
+          </span>
+          <span>
+            <p>{post.username}</p>
+          </span>
+          <span>
+            <p>{minutesSince(post.updated_at)} mins ago</p>
+          </span>
         </>
       )}
-      <div>
+      <div className="_justify-right">
         <button
           type="button"
           onClick={() => {
