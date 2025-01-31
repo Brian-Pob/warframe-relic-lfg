@@ -4,6 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import Scoper from "@/components/Scoper";
 import css from "./index.css?raw";
+import PostRow from "@/components/PostRow";
 export const Route = createFileRoute("/posts/")({
   component: App,
 });
@@ -46,21 +47,17 @@ function App() {
       <h1 id="title">Warframe Relic LFG Active Posts</h1>
 
       <ul className="results-grid">
-        <li className="results-grid__header">
+        <li className="results-grid__header results-grid__row">
           <span>Relic</span>
           <span> Open Slots</span>
           <span>Updated</span>
           <span>Username</span>
+          <span> </span>
         </li>
         {posts
           .toSorted((a, b) => a.updated_at - b.updated_at)
           .map((post) => (
-            <li className="results-grid__row" key={post.post_id}>
-              <span>{`${post.tier} ${post.relic_name}`}</span>
-              <span className="text-right">{post.open_slots}</span>
-              <span>{minutesSince(post.updated_at)} mins ago</span>
-              <span>{post.username}</span>
-            </li>
+            <PostRow post={post} key={post.post_id} />
           ))}
         {/* TODO: Turn each row into a component. Pass in the post data as props. Add a button to toggle the row contents with the lfg message*/}
       </ul>
