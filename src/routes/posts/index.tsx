@@ -1,5 +1,4 @@
 import type { Post } from "@/types/Post";
-import { minutesSince } from "@/utils/minutesSince";
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import Scoper from "@/components/Scoper";
@@ -49,9 +48,9 @@ function App() {
       <ul className="results-grid">
         <li className="results-grid__header results-grid__row">
           <span>Relic</span>
-          <span> Open Slots</span>
-          <span>Updated</span>
+          <span>Open Slots</span>
           <span>Username</span>
+          <span>Updated</span>
           <span> </span>
         </li>
         {posts
@@ -59,7 +58,6 @@ function App() {
           .map((post) => (
             <PostRow post={post} key={post.post_id} />
           ))}
-        {/* TODO: Turn each row into a component. Pass in the post data as props. Add a button to toggle the row contents with the lfg message*/}
       </ul>
     </main>
   );
