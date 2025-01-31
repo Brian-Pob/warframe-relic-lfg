@@ -14,6 +14,10 @@
   text-align: justify;
 }
 
+._justify-right {
+  justify-content: right !important;
+}
+
 /* Credit: https://tailwindcss.com/docs/screen-readers#screen-reader-only-elements */
 .sr-only {
   position: absolute;
