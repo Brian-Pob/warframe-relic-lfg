@@ -1,5 +1,3 @@
-@import "./utilities.css" layer(utilities);
-
 body {
   font-family:
     "Inter",
@@ -15,6 +13,7 @@ body {
     "Helvetica Neue",
     sans-serif;
 }
+
 main {
   display: flex;
   flex-direction: column;

@@ -1,4 +1,8 @@
-@import "https://unpkg.com/open-props" layer(open-props);
+/* @import "https://unpkg.com/open-props" layer(open-props);
 @import "https://unpkg.com/open-props/normalize.min.css" layer(open-props);
-@import "https://unpkg.com/open-props/buttons.min.css" layer(open-props);
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "https://unpkg.com/open-props/buttons.min.css" layer(open-props); */
+@import "open-props/style";
+@import "open-props/normalize";
+@import "open-props/buttons";
+@import "@fontsource/inter";
+@import "./utilities.css" layer(utilities);
