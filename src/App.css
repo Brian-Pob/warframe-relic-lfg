@@ -55,7 +55,7 @@ form {
 }
 
 .results-grid {
-  width: min(100%, 40rem);
+  width: min(100%, 50rem);
 
   @media (width < 600px) {
     width: 98%;
