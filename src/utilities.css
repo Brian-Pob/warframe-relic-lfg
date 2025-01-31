@@ -1,16 +1,16 @@
-.text-center {
+._text-center {
   text-align: center;
 }
 
-.text-right {
+._text-right {
   text-align: right;
 }
 
-.text-left {
+._text-left {
   text-align: left;
 }
 
-.text-justify {
+._text-justify {
   text-align: justify;
 }
 
