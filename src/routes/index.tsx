@@ -67,8 +67,7 @@ function App() {
       <table className="results-grid">
         <thead>
           <tr>
-            <th>Relic Name</th>
-            <th>Tier</th>
+            <th>Relic</th>
             <th>Rewards</th>
           </tr>
         </thead>

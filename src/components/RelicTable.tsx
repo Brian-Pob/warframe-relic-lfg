@@ -39,8 +39,7 @@ const RelicRow = memo(
     // index, // uncomment to use the index
   }: { relic: Relic; index: number; searchInput: string }) => (
     <tr>
-      <td>{relic.relic_name}</td>
-      <td>{relic.tier}</td>
+      <td>{relic.tier} {relic.relic_name} </td>
       <td>
         <RewardsList rewards={relic.rewards} searchInput={searchInput} />
       </td>

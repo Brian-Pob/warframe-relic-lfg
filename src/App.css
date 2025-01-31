@@ -55,7 +55,7 @@ form {
 }
 
 .results-grid {
-  width: min(100%, 50rem);
+  width: min(100%, 45rem);
 
   @media (width < 600px) {
     width: 98%;
@@ -66,12 +66,6 @@ thead {
   th:nth-child(1) {
     width: 20%;
   }
-
-  th:nth-child(2) {
-    width: 12%;
-  }
-
-  /* 3rd column takes up remaining space */
 }
 
 ul {
@@ -105,4 +99,10 @@ li {
   bottom: 5vh;
   right: 5vw;
   font-size: xx-large;
+}
+
+/* To make sure the <style> tag is hidden when using @scope */
+/* Lmao this is so scuffed */
+style {
+  display: none !important;
 }

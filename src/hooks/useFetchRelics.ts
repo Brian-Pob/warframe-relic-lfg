@@ -21,14 +21,13 @@ const useFetchRelics = () => {
         throw new Error(`Response status ${response.status}`);
       }
       const { relics: relicsJson } = await response.json();
-
       localStorage.setItem(
         "relics",
         JSON.stringify(relicsJson)
           .replaceAll("itemName", "item_name")
           .replaceAll("relicName", "relic_name"),
       );
-      setRelicData(relicsJson);
+      setRelicData(JSON.parse(localStorage.getItem("relics") as string));
     } catch (error) {
       console.error("Error fetching relics:", error);
     } finally {

@@ -1,0 +1,62 @@
+.minutes-since {
+  text-wrap-mode: nowrap;
+}
+
+.inv-btn {
+  padding: var(--size-1) var(--size-2);
+
+  width: min(7rem, 100%);
+}
+
+:has(> .inv-btn) {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.inv-btn__tooltip {
+  display: flex;
+  position: absolute;
+  left: 105%;
+  width: fit-content;
+  height: 2rem;
+  padding: var(--size-2);
+  background-color: rgba(0, 0, 0);
+  color: white;
+  text-align: center;
+  border-radius: var(--radius-4);
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+
+  @media (640px <=width < 1000px) {
+    left: 40%;
+    bottom: 100%;
+  }
+
+  @media (width < 640px) {
+    display: none;
+  }
+}
+
+.inv-btn__tooltip[data-visible="true"] {
+  /* subtle bounce animation; */
+  animation:
+    var(--animation-shake-z) 0s,
+    var(--animation-fade-out) 1s forwards;
+  animation-duration: 0.7s;
+}
+
+.lfg-copy {
+  grid-column: span 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: monospace;
+  font-size: var(--font-size-1);
+}
+
+.lfg-copy > input {
+  width: 100%;
+}

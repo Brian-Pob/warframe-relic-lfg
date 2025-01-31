@@ -1,6 +1,8 @@
 import type { Post } from "@/types/Post";
 import { minutesSince } from "@/utils/minutesSince";
 import { useRef, useState, useEffect } from "react";
+import Scoper from '../Scoper';
+import css from "./PostRow.css?raw";
 
 export default function PostRow({
   post,
@@ -25,6 +27,7 @@ export default function PostRow({
 
   return (
     <li className="results-grid__row" key={post.post_id}>
+      <Scoper style={css} />
       {isOpen ? (
         <div className="lfg-copy">
           <input
