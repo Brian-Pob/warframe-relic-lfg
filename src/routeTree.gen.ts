@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as PostsIndexImport } from './routes/posts/index'
+import { Route as CreateGroupIndexImport } from './routes/create-group/index'
 
 // Create/Update Routes
 
@@ -35,6 +36,12 @@ const PostsIndexRoute = PostsIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const CreateGroupIndexRoute = CreateGroupIndexImport.update({
+  id: '/create-group/',
+  path: '/create-group/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -53,6 +60,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/create-group/': {
+      id: '/create-group/'
+      path: '/create-group'
+      fullPath: '/create-group'
+      preLoaderRoute: typeof CreateGroupIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/posts/': {
       id: '/posts/'
       path: '/posts'
@@ -68,12 +82,14 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/create-group': typeof CreateGroupIndexRoute
   '/posts': typeof PostsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/create-group': typeof CreateGroupIndexRoute
   '/posts': typeof PostsIndexRoute
 }
 
@@ -81,27 +97,30 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/create-group/': typeof CreateGroupIndexRoute
   '/posts/': typeof PostsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/posts'
+  fullPaths: '/' | '/about' | '/create-group' | '/posts'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/posts'
-  id: '__root__' | '/' | '/about' | '/posts/'
+  to: '/' | '/about' | '/create-group' | '/posts'
+  id: '__root__' | '/' | '/about' | '/create-group/' | '/posts/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  CreateGroupIndexRoute: typeof CreateGroupIndexRoute
   PostsIndexRoute: typeof PostsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  CreateGroupIndexRoute: CreateGroupIndexRoute,
   PostsIndexRoute: PostsIndexRoute,
 }
 
@@ -117,6 +136,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/create-group/",
         "/posts/"
       ]
     },
@@ -125,6 +145,9 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/create-group/": {
+      "filePath": "create-group/index.tsx"
     },
     "/posts/": {
       "filePath": "posts/index.tsx"

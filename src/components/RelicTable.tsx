@@ -1,5 +1,6 @@
 import { memo } from "react";
 import type { Relic, Item } from "@/types/Relic";
+// import { Navigate } from '@tanstack/react-router';
 
 // Memoized component for rendering rewards
 const RewardsList = memo(
@@ -37,14 +38,30 @@ const RelicRow = memo(
     relic,
     searchInput,
     // index, // uncomment to use the index
-  }: { relic: Relic; index: number; searchInput: string }) => (
-    <tr>
-      <td>{relic.tier} {relic.relic_name} </td>
-      <td>
-        <RewardsList rewards={relic.rewards} searchInput={searchInput} />
-      </td>
-    </tr>
-  ),
+  }: { relic: Relic; index: number; searchInput: string }) => {
+    const handleSearchForGroup = () => {
+      // navigate to /posts?relic_id=XXXX
+      // NOTE: Consider refining that part in the backend to search by easier to read relic name
+    };
+    return (
+      <tr>
+        <td>
+          {relic.tier} {relic.relic_name}{" "}
+        </td>
+        <td>
+          <RewardsList rewards={relic.rewards} searchInput={searchInput} />
+        </td>
+        <td>
+          <div className="group-btns">
+            {/* Search for group will go to the /posts route and pass relic._id as the param to search for groups that are running that relic */}
+            <button type="button">Find a Squad</button>
+            {/* Create group will go to a /create-group route and pass relic._id as the param to create a new group that is running that relic */}
+            <button type="button">Create a Squad</button>
+          </div>
+        </td>
+      </tr>
+    );
+  },
 );
 
 const RelicTable = memo(
