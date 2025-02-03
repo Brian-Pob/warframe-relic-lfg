@@ -14,7 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as PostsIndexImport } from './routes/posts/index'
-import { Route as CreateGroupIndexImport } from './routes/create-group/index'
+import { Route as CreateSquadIndexImport } from './routes/create-squad/index'
 
 // Create/Update Routes
 
@@ -36,9 +36,9 @@ const PostsIndexRoute = PostsIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const CreateGroupIndexRoute = CreateGroupIndexImport.update({
-  id: '/create-group/',
-  path: '/create-group/',
+const CreateSquadIndexRoute = CreateSquadIndexImport.update({
+  id: '/create-squad/',
+  path: '/create-squad/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -60,11 +60,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
-    '/create-group/': {
-      id: '/create-group/'
-      path: '/create-group'
-      fullPath: '/create-group'
-      preLoaderRoute: typeof CreateGroupIndexImport
+    '/create-squad/': {
+      id: '/create-squad/'
+      path: '/create-squad'
+      fullPath: '/create-squad'
+      preLoaderRoute: typeof CreateSquadIndexImport
       parentRoute: typeof rootRoute
     }
     '/posts/': {
@@ -82,14 +82,14 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/create-group': typeof CreateGroupIndexRoute
+  '/create-squad': typeof CreateSquadIndexRoute
   '/posts': typeof PostsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/create-group': typeof CreateGroupIndexRoute
+  '/create-squad': typeof CreateSquadIndexRoute
   '/posts': typeof PostsIndexRoute
 }
 
@@ -97,30 +97,30 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/create-group/': typeof CreateGroupIndexRoute
+  '/create-squad/': typeof CreateSquadIndexRoute
   '/posts/': typeof PostsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/create-group' | '/posts'
+  fullPaths: '/' | '/about' | '/create-squad' | '/posts'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/create-group' | '/posts'
-  id: '__root__' | '/' | '/about' | '/create-group/' | '/posts/'
+  to: '/' | '/about' | '/create-squad' | '/posts'
+  id: '__root__' | '/' | '/about' | '/create-squad/' | '/posts/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  CreateGroupIndexRoute: typeof CreateGroupIndexRoute
+  CreateSquadIndexRoute: typeof CreateSquadIndexRoute
   PostsIndexRoute: typeof PostsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  CreateGroupIndexRoute: CreateGroupIndexRoute,
+  CreateSquadIndexRoute: CreateSquadIndexRoute,
   PostsIndexRoute: PostsIndexRoute,
 }
 
@@ -136,7 +136,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
-        "/create-group/",
+        "/create-squad/",
         "/posts/"
       ]
     },
@@ -146,8 +146,8 @@ export const routeTree = rootRoute
     "/about": {
       "filePath": "about.tsx"
     },
-    "/create-group/": {
-      "filePath": "create-group/index.tsx"
+    "/create-squad/": {
+      "filePath": "create-squad/index.tsx"
     },
     "/posts/": {
       "filePath": "posts/index.tsx"

@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/create-group/')({
+export const Route = createFileRoute('/create-squad/')({
   component: RouteComponent,
 })
 
