@@ -8,8 +8,10 @@ Makes use of [`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope)
 
 ## TODO
 
-- [ ] Will eventually implement an auth system but that's waaaay down the line
+- [ ] Implement searching by refinement in home page
+- [ ] Show refinement state in `/posts`
 - [ ] Implement search/ filter by relic in the posts UI
+- [ ] Will eventually implement an auth system but that's waaaay down the line
 
 ## Dev Notes
 
