@@ -8,6 +8,7 @@ export const app = new Elysia()
   .get(
     "/api/posts",
     ({ query }) => {
+      console.log(query.relic_id);
       if (!query.relic_id) {
         console.log("No relic_id provided, returning all posts...");
         // return db.query("SELECT * FROM posts").all() as Post[];
@@ -20,6 +21,8 @@ export const app = new Elysia()
                     p.open_slots,
                     r.relic_name,
                     r.tier,
+                    r.id,
+                    r.state,
                     u.username
                 FROM
                     posts p
@@ -30,9 +33,10 @@ export const app = new Elysia()
             `,
           )
           .all() as (Post & {
-          relic_tier: string; // Adjust the type based on your actual data type
-          relic_name: string; // Adjust the type based on your actual data type
-          username: string; // Adjust the type based on your actual data type
+          relic_tier: string;
+          relic_name: string;
+          username: string;
+          state: string;
         })[];
         return posts;
       }
@@ -40,11 +44,38 @@ export const app = new Elysia()
       console.log(`Getting post with relic_id: ${query.relic_id}`);
 
       // Need to rewrite this to replace the relic_id with the relic_name from the relics table and user_id with username from the users table
-      const post = db
-        .query("SELECT * FROM posts WHERE relic_id = $relic_id")
-        .get({ relic_id: query.relic_id }) as Post;
+      const posts = db
+        .query(
+          `
+                SELECT
+                    p.post_id,
+                    p.updated_at,
+                    p.open_slots,
+                    r.relic_name,
+                    r.tier,
+                    r.id,
+                    r.state,
+                    u.username
+                FROM
+                    posts p
+                JOIN
+                    relics r ON p.relic_id = r.id
+                JOIN
+                    users u ON p.user_id = u.user_id
+                WHERE
+                    p.relic_id = $relic_id
+            `,
+        )
+        .all({
+          relic_id: query.relic_id,
+        }) as (Post & {
+        relic_tier: string;
+        relic_name: string;
+        username: string;
+        state: string;
+      })[];
 
-      return post ?? [];
+      return posts ?? [];
     },
     {
       query: t.Object({
