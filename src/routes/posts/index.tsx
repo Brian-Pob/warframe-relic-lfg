@@ -21,14 +21,14 @@ function App() {
       state: string; // refinement
     })[]
   >([]);
-  const { relic_id } = Route.useSearch();
+  const { relic } = Route.useSearch();
 
   const fetchPosts = useCallback(async () => {
     try {
-      console.log(relic_id);
+      console.log(relic);
       let queryString = "/api/posts";
-      if (relic_id) {
-        queryString += `?relic_id=${relic_id}`;
+      if (relic) {
+        queryString += `?relic=${relic}`;
       }
       const response = await fetch(queryString);
       if (!response.ok) {
@@ -43,7 +43,7 @@ function App() {
       // setIsLoading(false)
       console.log("Posts fetched");
     }
-  }, [relic_id]);
+  }, [relic]);
 
   useEffect(() => {
     fetchPosts();
