@@ -6,10 +6,15 @@ Uses [React](https://react.dev/) with [Million.js](https://million.dev/) for the
 
 Makes use of [`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope) (in an extremely scuffed way). Need to enable in Firefox with a feature flag.
 
+1. Type `about:config` in your URL bar
+2. Search for `layout.css.at-scope.enabled`
+3. Enable the flag
+
 ## TODO
 
-- [ ] Implement searching by refinement in home page
-- [ ] Show refinement state in `/posts`
+- [ ] Refactor `/posts` search to search by relic_tier and relic_name instead of `relic_id`
+~~- [ ] Implement searching by refinement in home page~~
+- [x] Show refinement state in `/posts`
 - [ ] Implement search/ filter by relic in the posts UI
 - [ ] Will eventually implement an auth system but that's waaaay down the line
 
