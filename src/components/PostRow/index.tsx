@@ -1,7 +1,7 @@
 import type { Post } from "@/types/Post";
 import { minutesSince } from "@/utils/minutesSince";
 import { useRef, useState, useEffect } from "react";
-import Scoper from '../Scoper';
+import Scoper from "../Scoper";
 import css from "./PostRow.css?raw";
 
 export default function PostRow({
@@ -11,6 +11,7 @@ export default function PostRow({
     tier: string;
     relic_name: string;
     username: string;
+    state: string; // state is refinement, probably rename this in db and server
   };
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,6 +45,9 @@ export default function PostRow({
           <span>
             <p>{`${post.tier} ${post.relic_name}`}</p>
           </span>
+          <span>
+            <p>{post.state}</p>
+          </span>
           <span className="_justify-right">
             <p className="_text-right">{post.open_slots}</p>
           </span>
@@ -66,11 +70,11 @@ export default function PostRow({
           className="inv-btn"
         >
           {isOpen ? "Close" : "Get Inv."}
-        {tooltipVisible && (
-          <span className="inv-btn__tooltip" data-visible={tooltipVisible}>
-            Copied!
-          </span>
-        )}
+          {tooltipVisible && (
+            <span className="inv-btn__tooltip" data-visible={tooltipVisible}>
+              Copied!
+            </span>
+          )}
         </button>
       </div>
     </li>

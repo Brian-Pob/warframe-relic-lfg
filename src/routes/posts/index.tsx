@@ -18,6 +18,7 @@ function App() {
       tier: string;
       relic_name: string;
       username: string;
+      state: string; // refinement
     })[]
   >([]);
   const { relic_id } = Route.useSearch();
@@ -55,6 +56,7 @@ function App() {
       <ul className="results-grid">
         <li className="results-grid__header results-grid__row">
           <span>Relic</span>
+          <span>Refinement</span>
           <span>Open Slots</span>
           <span>Username</span>
           <span>Updated</span>
