@@ -12,9 +12,11 @@ Makes use of [`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope)
 
 ## TODO
 
-- [ ] Refactor `/posts` search to search by relic_tier and relic_name instead of `relic_id`
+- [x] Refactor `/posts` search to search by relic_tier and relic_name instead of `relic_id`
 ~~- [ ] Implement searching by refinement in home page~~
 - [x] Show refinement state in `/posts`
+- [ ] Clean up types for Posts
+- [ ] Consider renaming `state` to `refinement` for relics in db and in types
 - [ ] Implement search/ filter by relic in the posts UI
 - [ ] Will eventually implement an auth system but that's waaaay down the line
 
