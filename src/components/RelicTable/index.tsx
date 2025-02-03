@@ -1,5 +1,8 @@
 import { memo } from "react";
 import type { Relic, Item } from "@/types/Relic";
+import Scoper from "@/components/Scoper";
+import css from "./RelicTable.css?raw";
+import { Link } from "@tanstack/react-router";
 // import { Navigate } from '@tanstack/react-router';
 
 // Memoized component for rendering rewards
@@ -45,6 +48,7 @@ const RelicRow = memo(
     };
     return (
       <tr>
+        <Scoper style={css} />
         <td>
           {relic.tier} {relic.relic_name}{" "}
         </td>
@@ -54,9 +58,11 @@ const RelicRow = memo(
         <td>
           <div className="group-btns">
             {/* Search for group will go to the /posts route and pass relic._id as the param to search for groups that are running that relic */}
-            <button type="button">Find a Squad</button>
+            <Link to="/posts" search={{ relic_id: relic._id }}>
+              Find Squad
+            </Link>
             {/* Create group will go to a /create-group route and pass relic._id as the param to create a new group that is running that relic */}
-            <button type="button">Create a Squad</button>
+            <button type="button">Create Squad</button>
           </div>
         </td>
       </tr>
@@ -67,12 +73,14 @@ const RelicRow = memo(
 const RelicTable = memo(
   ({ relicData, searchInput }: { relicData: Relic[]; searchInput: string }) => {
     return relicData.map((relic: Relic, index: number) => (
-      <RelicRow
-        key={relic._id + relic.relic_name}
-        relic={relic}
-        index={index}
-        searchInput={searchInput}
-      />
+      <>
+        <RelicRow
+          key={relic._id + relic.relic_name}
+          relic={relic}
+          index={index}
+          searchInput={searchInput}
+        />
+      </>
     ));
   },
 );
