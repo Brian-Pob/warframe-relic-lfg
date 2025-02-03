@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Scoper from "@/components/Scoper";
 import css from "./index.css?raw";
 import PostRow from "@/components/PostRow";
+
 export const Route = createFileRoute("/posts/")({
   component: App,
 });
@@ -19,10 +20,16 @@ function App() {
       username: string;
     })[]
   >([]);
+  const { relic_id } = Route.useSearch();
 
   const fetchPosts = useCallback(async () => {
     try {
-      const response = await fetch("/api/posts");
+      console.log(relic_id);
+      let queryString = "/api/posts";
+      if (relic_id) {
+        queryString += `?relic_id=${relic_id}`;
+      }
+      const response = await fetch(queryString);
       if (!response.ok) {
         throw new Error(`Response status ${response.status}`);
       }
@@ -35,7 +42,7 @@ function App() {
       // setIsLoading(false)
       console.log("Posts fetched");
     }
-  }, []);
+  }, [relic_id]);
 
   useEffect(() => {
     fetchPosts();
@@ -53,11 +60,10 @@ function App() {
           <span>Updated</span>
           <span> </span>
         </li>
-        {posts
-          .toSorted((a, b) => a.updated_at - b.updated_at)
-          .map((post) => (
-            <PostRow post={post} key={post.post_id} />
-          ))}
+        {posts.length > 0 &&
+          posts
+            ?.toSorted((a, b) => a.updated_at - b.updated_at)
+            .map((post) => <PostRow post={post} key={post.post_id} />)}
       </ul>
     </main>
   );
