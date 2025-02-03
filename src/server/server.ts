@@ -8,9 +8,12 @@ export const app = new Elysia()
   .get(
     "/api/posts",
     ({ query }) => {
-      console.log(query.relic_id);
-      if (!query.relic_id) {
-        console.log("No relic_id provided, returning all posts...");
+      // ?relic= should be in the form RELIC-TIER_RELIC-NAME
+      // Example: meso_a2 / axi_B11
+      console.log(query.relic);
+
+      if (!query.relic) {
+        console.log("No relic provided, returning all posts...");
         // return db.query("SELECT * FROM posts").all() as Post[];
         const posts = db
           .query(
@@ -41,9 +44,8 @@ export const app = new Elysia()
         return posts;
       }
 
-      console.log(`Getting post with relic_id: ${query.relic_id}`);
-
-      // Need to rewrite this to replace the relic_id with the relic_name from the relics table and user_id with username from the users table
+      const relic_tier = query.relic?.split("_")[0];
+      const relic_name = query.relic?.split("_")[1];
       const posts = db
         .query(
           `
@@ -63,11 +65,13 @@ export const app = new Elysia()
                 JOIN
                     users u ON p.user_id = u.user_id
                 WHERE
-                    p.relic_id = $relic_id
+                    r.relic_name LIKE $relic_name AND
+                    r.tier LIKE $relic_tier
             `,
         )
         .all({
-          relic_id: query.relic_id,
+          relic_name: relic_name,
+          relic_tier: relic_tier,
         }) as (Post & {
         relic_tier: string;
         relic_name: string;
@@ -79,7 +83,7 @@ export const app = new Elysia()
     },
     {
       query: t.Object({
-        relic_id: t.Optional(t.String()),
+        relic: t.Optional(t.String()),
       }),
     },
   )

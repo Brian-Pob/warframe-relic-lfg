@@ -42,10 +42,6 @@ const RelicRow = memo(
     searchInput,
     // index, // uncomment to use the index
   }: { relic: Relic; index: number; searchInput: string }) => {
-    const handleSearchForGroup = () => {
-      // navigate to /posts?relic_id=XXXX
-      // NOTE: Consider refining that part in the backend to search by easier to read relic name
-    };
     return (
       <tr>
         <Scoper style={css} />
@@ -57,12 +53,15 @@ const RelicRow = memo(
         </td>
         <td>
           <div className="group-btns">
-            {/* Search for group will go to the /posts route and pass relic._id as the param to search for groups that are running that relic */}
-            <Link to="/posts" search={{ relic_id: relic._id }}>
+            {/* Search for group will go to the /posts route and pass relic tier and relic name as the param to search for groups that are running that relic */}
+            <Link
+              to="/posts"
+              search={{ relic: `${relic.tier}_${relic.relic_name}` }}
+            >
               Find Squad
             </Link>
             {/* Create group will go to a /create-group route and pass relic._id as the param to create a new group that is running that relic */}
-            <button type="button">Create Squad</button>
+            <Link to="/create-squad">Create Squad</Link>
           </div>
         </td>
       </tr>
