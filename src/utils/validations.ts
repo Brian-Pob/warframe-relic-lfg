@@ -1,4 +1,4 @@
-import type { Post } from "@/types/Post";
+import type { PostDB } from "@/types/Post";
 // type Post = {
 //   post_id: string;
 //   relic_name: string;
@@ -12,7 +12,7 @@ import type { Post } from "@/types/Post";
  * @param post The post to be validated
  * @returns false if the post contains invalid data. true if the post is valid
  */
-export const isValidPost = (post: Post): boolean => {
+export const isValidPost = (post: PostDB): boolean => {
   let is_valid = true;
 
   // 1. post_id

@@ -1,4 +1,4 @@
-import type { Post } from "@/types/Post";
+import type { PostUI } from "@/types/Post";
 import { minutesSince } from "@/utils/minutesSince";
 import { useRef, useState, useEffect } from "react";
 import Scoper from "../Scoper";
@@ -7,12 +7,7 @@ import css from "./PostRow.css?raw";
 export default function PostRow({
   post,
 }: {
-  post: Post & {
-    tier: string;
-    relic_name: string;
-    username: string;
-    state: string; // state is refinement, probably rename this in db and server
-  };
+  post: PostUI;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);

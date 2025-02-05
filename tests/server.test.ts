@@ -11,7 +11,8 @@ describe("Elysia server", () => {
       }),
     );
     const allPosts = await response.json();
-    Value.Assert(PostModel, allPosts[0]);
+    console.log(allPosts[0]);
+    Value.Assert(PostModel.UI, allPosts[0]);
 
     expect(allPosts).toBeDefined();
     expect(allPosts).not.toBeNull();

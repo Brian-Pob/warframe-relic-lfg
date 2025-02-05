@@ -1,6 +1,6 @@
 import { expect, test, describe, afterAll } from "bun:test";
 import { Database } from "bun:sqlite";
-import type { Post } from "../src/types/Post";
+import type { PostDB } from "../src/types/Post";
 import type { User } from "../src/types/User";
 
 const db = new Database("database.sqlite");
@@ -15,7 +15,9 @@ db.query("PRAGMA foreign_keys = ON").run();
 // 	user_id: "0194599d-8684-7000-b810-f539cd0c473f",
 // };
 
-const SAMPLE_POST_DATA: Post = await Bun.file("tests/sample_post.json").json();
+const SAMPLE_POST_DATA: PostDB = await Bun.file(
+  "tests/sample_post.json",
+).json();
 const USER_ID = SAMPLE_POST_DATA.user_id;
 const USERNAME = USER_ID.split("-")[3];
 const POST_ID = SAMPLE_POST_DATA.post_id;
@@ -23,7 +25,9 @@ const RELIC_ID = SAMPLE_POST_DATA.relic_id;
 
 describe("read", () => {
   test("get all posts", () => {
-    const allPosts: Post[] = db.query("SELECT * FROM posts").all() as Post[];
+    const allPosts: PostDB[] = db
+      .query("SELECT * FROM posts")
+      .all() as PostDB[];
     expect(allPosts).toBeDefined();
     expect(allPosts.length).toBeGreaterThan(0);
   });
@@ -50,9 +54,9 @@ describe("read", () => {
   });
 
   test("get specific post", () => {
-    const post: Post = db
+    const post: PostDB = db
       .query("SELECT * FROM posts WHERE post_id = $post_id")
-      .get({ $post_id: POST_ID }) as Post;
+      .get({ $post_id: POST_ID }) as PostDB;
     expect(post).not.toBeNull();
     expect(post.post_id).toBe(POST_ID);
     expect(post.relic_id).toBe(RELIC_ID);
@@ -71,9 +75,9 @@ describe("read", () => {
     const searchPosts = `
 			SELECT * FROM posts WHERE relic_id = $relic_id;
 		`;
-    const posts: Post[] = db
+    const posts: PostDB[] = db
       .query(searchPosts)
-      .all({ $relic_id: relic_id }) as Post[];
+      .all({ $relic_id: relic_id }) as PostDB[];
     expect(posts).toBeDefined();
     expect(posts.length).toBeGreaterThan(0);
     expect(posts.some((post) => post.relic_id === relic_id)).toBe(true);
@@ -84,9 +88,9 @@ describe("read", () => {
     const searchPosts = `
 			SELECT * FROM posts WHERE relic_id = $relic_id;
 		`;
-    const posts: Post[] = db
+    const posts: PostDB[] = db
       .query(searchPosts)
-      .all({ $relic_id: relic_id }) as Post[];
+      .all({ $relic_id: relic_id }) as PostDB[];
     expect(posts).toBeDefined();
     expect(posts.length).toBe(0);
   });
@@ -139,9 +143,9 @@ describe("write", () => {
       $open_slots: open_slots,
     });
 
-    const post: Post = db
+    const post: PostDB = db
       .query("SELECT * FROM posts WHERE post_id = $post_id")
-      .get({ $post_id: post_id }) as Post;
+      .get({ $post_id: post_id }) as PostDB;
     expect(post).not.toBeNull();
     expect(post.post_id).toBe(post_id);
     expect(post.relic_id).toBe(relic_id);
@@ -179,9 +183,9 @@ describe("write", () => {
       console.log("✅ Foreign key constraint enforced when adding post.");
     }
 
-    const post: Post = db
+    const post: PostDB = db
       .query("SELECT * FROM posts WHERE post_id = $post_id")
-      .get({ $post_id: failing_post_id }) as Post;
+      .get({ $post_id: failing_post_id }) as PostDB;
     expect(post).toBeNull();
 
     if (post) {
@@ -217,9 +221,9 @@ describe("write", () => {
       console.log("✅ Foreign key constraint enforced when adding post.");
     }
 
-    const post: Post = db
+    const post: PostDB = db
       .query("SELECT * FROM posts WHERE post_id = $post_id")
-      .get({ $post_id: failing_post_id }) as Post;
+      .get({ $post_id: failing_post_id }) as PostDB;
     expect(post).toBeNull();
 
     if (post) {
@@ -245,9 +249,9 @@ describe("update", () => {
       $post_id: post_id,
     });
 
-    const post: Post = db
+    const post: PostDB = db
       .query("SELECT * FROM posts WHERE post_id = $post_id")
-      .get({ $post_id: post_id }) as Post;
+      .get({ $post_id: post_id }) as PostDB;
     expect(post).not.toBeNull();
     expect(post.post_id).toBe(post_id);
 
@@ -304,9 +308,9 @@ describe("delete", () => {
 		`;
     db.query(deletePost).run({ $post_id: post_id });
 
-    const post: Post = db
+    const post: PostDB = db
       .query("SELECT * FROM posts WHERE post_id = $post_id")
-      .get({ $post_id: post_id }) as Post;
+      .get({ $post_id: post_id }) as PostDB;
     expect(post).toBeNull();
   });
 });
