@@ -1,4 +1,4 @@
-import type { Post } from "@/types/Post";
+import type { PostDB } from "@/types/Post";
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import Scoper from "@/components/Scoper";
@@ -14,7 +14,7 @@ function App() {
   // Can filter by relic id
   //
   const [posts, setPosts] = useState<
-    (Post & {
+    (PostDB & {
       tier: string;
       relic_name: string;
       username: string;
