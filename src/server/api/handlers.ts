@@ -24,12 +24,14 @@ const handlers = {
     try {
       db.query(SQL_QUERIES.INSERT_POST).run({
         ...body,
+        post_id: Bun.randomUUIDv7(),
         created_at: now,
         updated_at: now,
       });
+
       return body;
     } catch (e) {
-      console.error("Error creating post:", e);
+      // console.error("Error creating post:", e);
       return error(500, e);
     }
   },
@@ -92,7 +94,7 @@ const handlers = {
     const user = db
       .query(SQL_QUERIES.GET_USER_BY_ID)
       .get({ user_id: params.user_id }) as User;
-    return user ?? error(404, "User not found");
+    return user ?? error(404, { message: "User not found" });
   },
 };
 
