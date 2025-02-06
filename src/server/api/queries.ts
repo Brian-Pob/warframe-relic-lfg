@@ -7,11 +7,11 @@ const SQL_QUERIES = {
       p.open_slots,
       r.relic_name,
       r.tier,
-      r.id,
-      r.state,
+      r.relic_id,
+      r.refinement,
       u.username
     FROM posts p
-    JOIN relics r ON p.relic_id = r.id
+    JOIN relics r ON p.relic_id = r.relic_id
     JOIN users u ON p.user_id = u.user_id
   `,
   GET_POSTS_BY_RELIC: `
@@ -21,11 +21,11 @@ const SQL_QUERIES = {
       p.open_slots,
       r.relic_name,
       r.tier,
-      r.id,
-      r.state,
+      r.relic_id,
+      r.refinement,
       u.username
     FROM posts p
-    JOIN relics r ON p.relic_id = r.id
+    JOIN relics r ON p.relic_id = r.relic_id
     JOIN users u ON p.user_id = u.user_id
     WHERE r.relic_name LIKE $relic_name 
     AND r.tier LIKE $relic_tier

@@ -19,7 +19,7 @@ const PostModelUI = t.Object({
   username: t.String(),
   relic_name: t.String(),
   tier: t.String(),
-  state: t.String(),
+  refinement: t.String(),
   updated_at: t.Number(),
   open_slots: t.Number({
     minimum: 1,

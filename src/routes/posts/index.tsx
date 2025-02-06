@@ -1,26 +1,24 @@
-import type { PostDB } from "@/types/Post";
+import type { PostUI } from "@/types/Post";
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import Scoper from "@/components/Scoper";
 import css from "./index.css?raw";
-import PostRow from "@/components/PostRow";
+import { PostRow } from "@/components/PostRow";
+import type { SearchSchemaInput } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/posts/")({
   component: App,
+  validateSearch: (
+    search?: Record<string, string> & SearchSchemaInput,
+  ): { relic: string } => {
+    return {
+      relic: search?.relic ?? "",
+    };
+  },
 });
 
 function App() {
-  // Make get request to /api/posts
-  // Can filter by relic id
-  //
-  const [posts, setPosts] = useState<
-    (PostDB & {
-      tier: string;
-      relic_name: string;
-      username: string;
-      state: string; // refinement
-    })[]
-  >([]);
+  const [posts, setPosts] = useState<PostUI[]>([]);
   const { relic } = Route.useSearch();
 
   const fetchPosts = useCallback(async () => {

@@ -1,10 +1,10 @@
 import type { PostUI } from "@/types/Post";
 import { minutesSince } from "@/utils/minutesSince";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, memo } from "react";
 import Scoper from "../Scoper";
 import css from "./PostRow.css?raw";
 
-export default function PostRow({
+function PostRow_({
   post,
 }: {
   post: PostUI;
@@ -41,7 +41,7 @@ export default function PostRow({
             <p>{`${post.tier} ${post.relic_name}`}</p>
           </span>
           <span>
-            <p>{post.state}</p>
+            <p>{post.refinement}</p>
           </span>
           <span className="_justify-right">
             <p className="_text-right">{post.open_slots}</p>
@@ -75,3 +75,5 @@ export default function PostRow({
     </li>
   );
 }
+
+export const PostRow = memo(PostRow_);

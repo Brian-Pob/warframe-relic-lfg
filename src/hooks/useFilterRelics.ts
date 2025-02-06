@@ -7,7 +7,7 @@ const useFilterRelics = (
   // selectedRelicsDisplayCount: string,
 ) => {
   const filteredRelicsList = useFuzzySearchList({
-    list: relicData.filter((relic) => relic.state === "Intact"),
+    list: relicData.filter((relic) => relic.refinement === "Intact"),
     queryText: deferredSearchInput,
     getText: (relic) => [
       `${relic.relic_name} ${relic.tier}`,
