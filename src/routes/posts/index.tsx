@@ -5,6 +5,7 @@ import Scoper from "@/components/Scoper";
 import css from "./index.css?raw";
 import { PostRow } from "@/components/PostRow";
 import type { SearchSchemaInput } from "@tanstack/react-router";
+import { RelicSearchBar } from "@/components/RelicSearchBar";
 
 export const Route = createFileRoute("/posts/")({
   component: App,
@@ -50,7 +51,7 @@ function App() {
     <main>
       <Scoper style={css} />
       <h1 id="title">Warframe Relic LFG Active Posts</h1>
-
+      <RelicSearchBar />
       <ul className="results-grid">
         <li className="results-grid__header results-grid__row">
           <span>Relic</span>

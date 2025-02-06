@@ -1,0 +1,43 @@
+.relic-search {
+  position: relative;
+  width: 100%;
+  max-width: 20rem;
+}
+
+.relic-search input {
+  width: 100%;
+  padding: var(--size-2);
+}
+
+.relic-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius-2);
+  margin-top: var(--size-1);
+  z-index: 10;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-1);
+}
+
+.relic-suggestion {
+  max-width: 100%;
+}
+
+.relic-suggestion > button {
+  width: 100%;
+  text-align: left;
+  background: var(--surface-1);
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.relic-suggestion > button:hover {
+  background: var(--surface-3);
+}
