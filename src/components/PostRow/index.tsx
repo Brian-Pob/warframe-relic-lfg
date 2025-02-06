@@ -41,7 +41,7 @@ export default function PostRow({
             <p>{`${post.tier} ${post.relic_name}`}</p>
           </span>
           <span>
-            <p>{post.state}</p>
+            <p>{post.refinement}</p>
           </span>
           <span className="_justify-right">
             <p className="_text-right">{post.open_slots}</p>

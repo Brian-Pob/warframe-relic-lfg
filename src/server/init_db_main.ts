@@ -24,7 +24,7 @@ const createPosts = `
     updated_at INTEGER NOT NULL,
     open_slots INTEGER NOT NULL,
     user_id TEXT NOT NULL,
-    FOREIGN KEY (relic_id) REFERENCES relics(id),
+    FOREIGN KEY (relic_id) REFERENCES relics(relic_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
   );`;
 

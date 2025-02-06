@@ -74,7 +74,7 @@ const RelicTable = memo(
     return relicData.map((relic: Relic, index: number) => (
       <>
         <RelicRow
-          key={relic._id + relic.relic_name}
+          key={relic.relic_id + relic.relic_name}
           relic={relic}
           index={index}
           searchInput={searchInput}

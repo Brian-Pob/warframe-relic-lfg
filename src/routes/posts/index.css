@@ -14,7 +14,7 @@
   padding-inline-start: 0;
   display: grid;
   grid-template-columns: 0.75fr 1fr 0.5fr 1fr 1fr 1fr;
-  /* relic_name state(refinement) open-slots username updated buttons*/
+  /* relic_name refinement open-slots username updated buttons*/
   grid-auto-flow: row;
 }
 

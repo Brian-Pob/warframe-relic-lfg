@@ -22,14 +22,31 @@ const displayProgressBar = (current: number, total: number) => {
 // 	process.stdout.write(`\r${spinnerStates[spinnerIndex]} Processing...`);
 // };
 
+/**
+ * This is how the relics appear in the original JSON file. I rename
+ * some of the keys to make it closer to what I want.
+ */
+type UnprocessedRelic = {
+  _id: string;
+  tier: number;
+  relicName: string;
+  state: string;
+  rewards: {
+    _id: string;
+    itemName: string;
+    rarity: string;
+    chance: number;
+  }[];
+};
+
 // Insert relics, items, and rewards into the database
-const insertData = (db: Database, relics: any[]) => {
+const insertData = (db: Database, relics: UnprocessedRelic[]) => {
   console.log("Adding relics...");
 
   for (const [index, relic] of relics.entries()) {
     // Insert relic
     db.run(
-      "INSERT OR IGNORE INTO relics (id, tier, relic_name, state) VALUES (?, ?, ?, ?)",
+      "INSERT OR IGNORE INTO relics (relic_id, tier, relic_name, refinement) VALUES (?, ?, ?, ?)",
       [relic._id, relic.tier, relic.relicName, relic.state],
     );
 

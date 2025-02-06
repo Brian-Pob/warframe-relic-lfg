@@ -18,7 +18,7 @@ function App() {
       tier: string;
       relic_name: string;
       username: string;
-      state: string; // refinement
+      refinement: string; // refinement
     })[]
   >([]);
   const { relic } = Route.useSearch();
