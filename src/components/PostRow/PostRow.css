@@ -47,7 +47,7 @@
 }
 
 .lfg-copy {
-  grid-column: span 4;
+  grid-column: span 5;
   display: flex;
   justify-content: center;
   align-items: center;
