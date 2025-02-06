@@ -18,7 +18,8 @@ Makes use of [`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope)
 - [x] Clean up types for Posts
 - [x] Clean up server code
 - [ ] Update server tests
-- [ ] Consider renaming `state` to `refinement` for relics in db and in types
+- [x] Rename `state` to `refinement` for relics in db and in types
+- [x] Add type-safety to query params on `/posts` route
 - [ ] Implement search/ filter by relic in the posts UI
 - [ ] Consider a toggle on relics page to search by reward name or relic name
 - [ ] Will eventually implement an auth system but that's waaaay down the line
