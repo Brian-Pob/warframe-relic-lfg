@@ -49,10 +49,10 @@ for (let i = 0; i < NUM_POSTS; i++) {
   db.query(addPost).run({
     post_id: randomUUIDv7(),
     relic_id: SAMPLE_RELICS[i],
-    user_id: USER_IDS[Math.floor(Math.random() * USER_IDS.length)],
+    user_id: USER_IDS[getRandomNumber(0, NUM_USERS)],
     created_at: Date.now(),
     updated_at: Date.now(),
-    open_slots: Math.floor(Math.random() * 4),
+    open_slots: getRandomNumber(1, 4),
   });
 }
 
