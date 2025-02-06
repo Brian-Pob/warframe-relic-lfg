@@ -14,7 +14,17 @@ export const app = new Elysia()
   .post(
     "/api/posts",
     ({ body, error }) => handlers.createPost({ body, error }),
-    { body: PostModel.DB },
+    {
+      body: PostModel.DB,
+      error({ code, error }) {
+        console.error("Encountered error with code", code);
+        const e = error as Readonly<Error>;
+        console.log(e.message);
+        const errorMessage = JSON.parse(e.message);
+
+        return { message: errorMessage.message };
+      },
+    },
   )
   .put(
     "/api/posts",
