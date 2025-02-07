@@ -3,6 +3,10 @@ import { app } from "../src/server/server";
 import { PostModel } from "../src/types/Post";
 import { Value } from "@sinclair/typebox/value";
 
+// sample_post.json is a sample PostDB object created during the seeding process
+// It contains a single post object that definitely exists in the database.
+import SamplePost from "./sample_post.json";
+
 describe("Elysia server", () => {
   test("GET /api/posts - should return all posts", async () => {
     const response = await app.handle(
@@ -36,7 +40,7 @@ describe("Elysia server", () => {
     const newPost = {
       post_id: Bun.randomUUIDv7(),
       relic_id: "8220ce74edc095b4497ba1b05b649ec9",
-      user_id: "0194db11-c789-7000-8652-d839ce9365d4",
+      user_id: SamplePost.user_id,
       created_at: Date.now(),
       updated_at: Date.now(),
       open_slots: 2,
@@ -97,7 +101,7 @@ describe("Elysia server", () => {
   });
 
   test("GET /api/users/:user_id - should return user by ID", async () => {
-    const userId = "0194db11-c789-7000-8652-d839ce9365d4";
+    const userId = SamplePost.user_id;
     const response = await app.handle(
       new Request(`http://localhost:5174/api/users/${userId}`, {
         method: "GET",
