@@ -14,8 +14,9 @@
     "initdb:relics": "bun run src/server/init_db_relics.ts",
     "convert_relics": "bun run src/server/convert_relics.ts",
     "seed": "bun run src/server/seed.ts",
-    "initdb:everything": "bun initdb:relics && bun convert_relics && bun initdb:main && bun seed",
-    "initdb:main:full": "bun initdb:main && bun seed",
+    "seed-many": "bun run src/server/seed-many.ts",
+    "initdb:everything": "bun initdb:relics && bun convert_relics && bun initdb:main && bun seed-many",
+    "initdb:main:full": "bun initdb:main && bun seed-many",
     "initdb:relics:full": "bun initdb:relics && bun convert_relics"
   },
   "dependencies": {
