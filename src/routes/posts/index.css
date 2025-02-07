@@ -6,6 +6,11 @@
 .results-grid__header > span {
   border-block-end: 3px solid white;
   font-weight: bolder;
+  margin-block-end: var(--size-4);
+
+  &:last-child {
+    grid-column: span 2;
+  }
 }
 
 .results-grid {
@@ -16,10 +21,6 @@
   grid-template-columns: 0.75fr 1fr 0.5fr 1fr 1fr 1fr;
   /* relic_name refinement open-slots username updated buttons*/
   grid-auto-flow: row;
-}
-
-.results-grid__header > * {
-  margin-block-end: var(--size-4);
 }
 
 .results-grid__row:nth-child(2n) > * {

@@ -59,7 +59,6 @@ function App() {
           <span>Slots Left</span>
           <span>Username</span>
           <span>Updated</span>
-          <span> </span>
         </li>
         {posts.length > 0 &&
           posts
