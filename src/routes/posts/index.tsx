@@ -5,7 +5,7 @@ import Scoper from "@/components/Scoper";
 import css from "./index.css?raw";
 import { PostRow } from "@/components/PostRow";
 import type { SearchSchemaInput } from "@tanstack/react-router";
-import { RelicSearchBar } from "@/components/RelicSearchBar";
+import RelicSearchBar from "@/components/RelicSearchBar";
 
 export const Route = createFileRoute("/posts/")({
   component: App,
@@ -20,8 +20,8 @@ export const Route = createFileRoute("/posts/")({
 
 function App() {
   const [posts, setPosts] = useState<PostUI[]>([]);
-  const { relic } = Route.useSearch();
-
+  let { relic } = Route.useSearch();
+  relic = relic.replace("%20", "_");
   const fetchPosts = useCallback(async () => {
     try {
       console.log(relic);

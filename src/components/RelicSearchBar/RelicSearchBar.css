@@ -4,6 +4,11 @@
   max-width: 20rem;
 }
 
+.relic-search-input-container {
+  display: flex;
+  gap: var(--size-1);
+}
+
 .relic-search input {
   width: 100%;
   padding: var(--size-2);
@@ -40,4 +45,8 @@
 
 .relic-suggestion > button:hover {
   background: var(--surface-3);
+}
+
+.relic-suggestion.selected button {
+  background-color: var(--surface-3);
 }
