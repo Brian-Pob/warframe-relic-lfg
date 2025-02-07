@@ -56,7 +56,7 @@ function App() {
         <li className="results-grid__header results-grid__row">
           <span>Relic</span>
           <span>Refinement</span>
-          <span>Open Slots</span>
+          <span>Slots Left</span>
           <span>Username</span>
           <span>Updated</span>
           <span> </span>
