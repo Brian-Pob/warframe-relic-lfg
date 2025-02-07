@@ -17,12 +17,30 @@ Makes use of [`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope)
 - [x] Show refinement state in `/posts`
 - [x] Clean up types for Posts
 - [x] Clean up server code
-- [ ] Update server tests
+- [x] Update server tests
 - [x] Rename `state` to `refinement` for relics in db and in types
 - [x] Add type-safety to query params on `/posts` route
-- [ ] Implement search/ filter by relic in the posts UI
+- [x] Implement search/ filter by relic in the posts UI. *Done, but consider further improvements.*
+- [ ] Implement ability to create a post (assuming user is logged in).
+  - [ ] Flesh out the create-squad page
+  - [ ] Create a form to create a post
+    - [ ] Relic (tier + name) and refinement (determine the relic_id based on these)
+    - [ ] Number of open slots
+  - [ ] Make the form submit a POST request to the server
+  - [ ] Make a /post/:id route that shows a single post
+    - [ ] UI should be different if the user is the creator of the post
+    - [ ] Allow the creator to delete or update the post
+- [ ] Implement sorting by fields in the posts UI
 - [ ] Consider a toggle on relics page to search by reward name or relic name
-- [ ] Will eventually implement an auth system but that's waaaay down the line
+- [ ] Consider searching by reward name in the posts UI. *I think this is a good idea but it might be scope creep*
+
+## TODO Later
+
+- [ ] Implement user authentication. Full on account system.
+  - [ ] Sign up
+  - [ ] Log in
+  - [ ] Log out
+  - [ ] Update user info
 
 ## Dev Notes
 
@@ -41,6 +59,10 @@ Makes use of [`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope)
   - require user to input number of open slots
   - Eventually add refinement as an option
   - User creates post, post shows up in /posts
+
+The *Best* way to implement accounts would be to make sure username matches Warframe username. 
+Kind of like how warframe.market does it.
+But that's a lot of work. Def overkill since no one is gonna use this lol.
 
 ## Acknowledgements
 
