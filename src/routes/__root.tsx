@@ -3,6 +3,7 @@ import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import css from "./__root.css?raw";
 import { Logo } from "@/components/Logo";
 import Scoper from "@/components/Scoper";
+import Footer from "@/components/Footer";
 export const Route = createRootRoute({
   component: RootComponent,
 });
@@ -42,6 +43,7 @@ function RootComponent() {
         </div>
       </nav>
       <Outlet />
+      <Footer />
       <TanStackRouterDevtools position="bottom-right" />
     </>
   );

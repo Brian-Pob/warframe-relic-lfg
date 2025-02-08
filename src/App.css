@@ -19,9 +19,10 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  height: 100svh;
+  min-height: 100svh;
 
   @media (width>=600px) {
+    min-height: 80svh;
     margin-block-start: 10vh;
   }
 }
@@ -103,6 +104,44 @@ li {
 
 h1 {
   font-size: var(--font-size-fluid-3);
+}
+
+
+
+footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--size-2);
+  padding: var(--size-2);
+  font-size: var(--size-fluid-1);
+  width: 100%;
+  margin-block-start: var(--size-8);
+
+  @media (width < 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+footer > div {
+  align-content: center;
+  justify-items: center;
+}
+
+footer > div > p {
+  text-align: center;
+  font-size: var(--font-size-1);
+
+}
+
+.social-links {
+  display: flex;
+  gap: var(--size-4);
+  padding-inline-start: 0;
+}
+
+.social-links svg {
+  width: var(--size-6);
+  aspect-ratio: 1;
 }
 
 /* To make sure the <style> tag is hidden when using @scope */
