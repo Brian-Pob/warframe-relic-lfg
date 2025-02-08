@@ -2,6 +2,8 @@ import { Elysia, t } from "elysia";
 import { PostModel } from "@/types/Post";
 import { UserModel } from "@/types/User";
 import handlers from "./api/handlers";
+import lilguys from "@/utils/lil-guys";
+import { getRandomNumber } from "@/utils/random";
 
 // Create and configure the Elysia app
 export const app = new Elysia()
@@ -41,7 +43,8 @@ export const app = new Elysia()
     handlers.getUserById({ params, error }),
   )
   .onError(({ code }) => {
-    if (code === "NOT_FOUND") return "Invalid route - ≽^╥⩊╥^≼";
+    if (code === "NOT_FOUND")
+      return `Invalid route - ${lilguys[getRandomNumber(0, lilguys.length)]}`;
   })
   .listen(Bun.env.SERVER_PORT ?? 5174);
 
