@@ -8,6 +8,7 @@
     "dev:serve": "bun run --watch src/server/server.ts",
     "dev": "concurrently \"bun run dev:ui\" \"bun run dev:serve\"",
     "build:ui": "tsc -b && bun run --bun vite build",
+    "serve": "bun run src/server/server.ts",
     "lint": "eslint .",
     "preview:ui": "bun run --bun vite preview",
     "initdb:main": "bun run src/server/init_db_main.ts",
