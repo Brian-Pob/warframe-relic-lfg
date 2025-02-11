@@ -20,6 +20,7 @@ main {
   align-items: center;
   gap: 2rem;
   min-height: 100svh;
+  margin-block-start: 2rem;
 
   @media (width>=600px) {
     min-height: 80svh;
