@@ -13,7 +13,6 @@ Makes use of [`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope)
 ## TODO
 
 - [x] Refactor `/posts` search to search by relic_tier and relic_name instead of `relic_id`
-- [ ] ~~Implement searching by refinement in home page~~
 - [x] Show refinement state in `/posts`
 - [x] Clean up types for Posts
 - [x] Clean up server code
@@ -21,6 +20,9 @@ Makes use of [`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope)
 - [x] Rename `state` to `refinement` for relics in db and in types
 - [x] Add type-safety to query params on `/posts` route
 - [x] Implement search/ filter by relic in the posts UI. *Done, but consider further improvements.*
+- [ ] Add open graph tags to the site
+- [ ] Consolidate styles to use open props vars as much as possible
+- [ ] Rename files to be more consistent. Mainly css files.
 - [ ] Implement ability to create a post (assuming user is logged in).
   - [ ] Flesh out the create-squad page
   - [ ] Create a form to create a post
@@ -33,6 +35,7 @@ Makes use of [`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope)
 - [ ] Implement sorting by fields in the posts UI
 - [ ] Consider a toggle on relics page to search by reward name or relic name
 - [ ] Consider searching by reward name in the posts UI. *I think this is a good idea but it might be scope creep*
+- [ ] ~~Implement searching by refinement in home page~~
 
 ## TODO Later
 
