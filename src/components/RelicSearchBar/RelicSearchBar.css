@@ -1,7 +1,8 @@
 .relic-search {
   position: relative;
+
   width: 100%;
-  max-width: 20rem;
+  max-width: var(--size-content-2);
 }
 
 .relic-search-input-container {
@@ -19,15 +20,19 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: var(--surface-2);
-  border: 1px solid var(--surface-3);
-  border-radius: var(--radius-2);
-  margin-top: var(--size-1);
-  z-index: 10;
-  padding: 0;
+  z-index: var(--layer-1);
+
   display: flex;
   flex-direction: column;
   gap: var(--size-1);
+
+  margin-top: var(--size-1);
+  padding: 0;
+
+  border: var(--border-size-1) solid var(--surface-3);
+  border-radius: var(--radius-2);
+
+  background: var(--surface-2);
 }
 
 .relic-suggestion {
@@ -36,10 +41,14 @@
 
 .relic-suggestion > button {
   width: 100%;
-  text-align: left;
-  background: var(--surface-1);
-  border: none;
+
   color: inherit;
+  text-align: left;
+
+  border: none;
+
+  background: var(--surface-1);
+
   cursor: pointer;
 }
 

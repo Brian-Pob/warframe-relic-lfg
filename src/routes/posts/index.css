@@ -4,9 +4,10 @@
 }
 
 .results-grid__header > span {
-  border-block-end: 3px solid white;
-  font-weight: bolder;
   margin-block-end: var(--size-4);
+
+  font-weight: var(--font-weight-7);
+  border-block-end: var(--border-size-2) solid var(--gray-0);
 
   &:last-child {
     grid-column: span 2;
@@ -14,13 +15,16 @@
 }
 
 .results-grid {
-  font-size: var(--font-size-fluid-0);
-  list-style: none;
-  padding-inline-start: 0;
   display: grid;
-  grid-template-columns: 0.75fr 1fr 0.5fr 1fr 1fr 1fr;
   /* relic_name refinement open-slots username updated buttons*/
   grid-auto-flow: row;
+  grid-template-columns: 0.75fr 1fr 0.5fr 1fr 1fr 1fr;
+
+  padding-inline-start: 0;
+
+  font-size: var(--font-size-fluid-0);
+
+  list-style: none;
 }
 
 .results-grid__row:nth-child(2n) > * {
@@ -30,13 +34,14 @@
 .results-grid__row > * {
   /* border: 1px solid white; */
   border-inline-end-width: 0px;
-  padding: var(--size-1);
 
+  padding: var(--size-1);
 }
 
 .results-grid__row > * {
   display: flex;
   align-items: center;
+
   padding-inline: var(--size-2);
 
   &:last-child {

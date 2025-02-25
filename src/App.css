@@ -17,8 +17,9 @@ body {
 main {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 2rem;
+  align-items: center;
+
   min-height: 100svh;
   margin-block-start: 2rem;
 
@@ -37,22 +38,25 @@ form {
   flex-direction: row;
   gap: 2rem;
 
+  @media (width < 600px) {
+    flex-direction: column;
+  }
+
   label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     position: relative;
+
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
   }
 
   span {
     position: absolute;
-    opacity: 0.7;
+
     font-size: 85%;
     text-align: center;
-  }
 
-  @media (width < 600px) {
-    flex-direction: column;
+    opacity: 0.7;
   }
 }
 
@@ -71,8 +75,9 @@ thead {
 }
 
 ul {
-  list-style: none;
   padding-inline-start: 0.5rem;
+
+  list-style: none;
 }
 
 li {
@@ -80,27 +85,32 @@ li {
   padding: 0;
 
   &.matches {
+    margin-block: 0.4rem;
+
+    border-radius: 5px;
+
     outline: 2px solid currentColor;
     outline-offset: 0.2rem;
-    border-radius: 5px;
-    margin-block: 0.4rem;
   }
 }
 
 .back-to-top {
-  color: var(--text-1);
-  width: 3.5rem;
-  aspect-ratio: 1/1;
-
-  border: 2px solid currentColor;
-  border-radius: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: fixed;
   bottom: 5vh;
   right: 5vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 3.5rem;
+
+  color: var(--text-1);
   font-size: xx-large;
+
+  border: 2px solid currentColor;
+  border-radius: 100%;
+  aspect-ratio: 1/1;
 }
 
 h1 {
@@ -113,10 +123,12 @@ footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--size-2);
-  padding: var(--size-2);
-  font-size: var(--size-fluid-1);
+
   width: 100%;
   margin-block-start: var(--size-8);
+  padding: var(--size-2);
+
+  font-size: var(--size-fluid-1);
 
   @media (width < 600px) {
     grid-template-columns: 1fr;
@@ -124,19 +136,20 @@ footer {
 }
 
 footer > div {
-  align-content: center;
   justify-items: center;
+  align-content: center;
 }
 
 footer > div > p {
-  text-align: center;
   font-size: var(--font-size-1);
+  text-align: center;
 
 }
 
 .social-links {
   display: flex;
   gap: var(--size-4);
+
   padding-inline-start: 0;
 }
 

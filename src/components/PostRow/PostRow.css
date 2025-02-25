@@ -1,58 +1,67 @@
 .minutes-since {
-  text-wrap-mode: nowrap;
+  text-wrap: nowrap;
 }
 
 .inv-btn {
-  padding: var(--size-1) var(--size-2);
-  width: min(7rem, 100%);
-  display: flex;
   position: relative;
+
+  display: flex;
   justify-content: center;
   align-items: center;
+
+  width: min(var(--size-content-1), 100%);
+  padding: var(--size-1) var(--size-2);
 
   @media (width < 640px) {
     padding: var(--size-1);
   }
 }
 
-
 .inv-btn__tooltip {
   position: absolute;
+  left: 105%;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  left: 105%;
+
+  height: var(--size-7);
   min-width: max-content;
-  height: 2rem;
   padding: var(--size-2);
-  background-color: rgba(0, 0, 0);
-  color: white;
+
+  color: var(--gray-0);
   text-align: center;
+  text-shadow: none;
+
   border-radius: var(--radius-round);
+
+  background-color: var(--gray-12);
+
   pointer-events: none;
 
   @media (width < 1000px) {
     left: 50%;
     translate: -50%;
+
     bottom: 120%;
   }
 }
 
 .inv-btn__tooltip[data-visible="true"] {
-  /* subtle bounce animation; */
   animation:
-    var(--animation-shake-z) 0s,
-    var(--animation-fade-out) 1s forwards;
-  animation-duration: 0.7s;
+    var(--animation-shake-z) 0.7s,
+    var(--animation-fade-out) 0.7s forwards;
 }
 
 .lfg-copy {
   grid-column: span 5;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: monospace;
+
   font-size: var(--font-size-1);
+  font-family: var(--font-mono);
 }
 
 .lfg-copy > input {
