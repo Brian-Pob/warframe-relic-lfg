@@ -4,41 +4,41 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    
-    
-    
+    // 
+    // 
+    // DEV SCRIPTS
     "dev:ui": "bun run --bun vite",
     "dev:serve": "bun run --watch src/server/server.ts",
     "dev": "concurrently \"bun run dev:ui\" \"bun run dev:serve\"",
     "serve": "bun run src/server/server.ts",
-    
-    
-    
+    // 
+    // 
+    // VITE BUILD SCRIPTS
     "build:ui": "tsc -b && bun run --bun vite build",
     "preview:ui": "bun run --bun vite preview",
-    
-    
-    
+    // 
+    // 
+    // LINTING SCRIPTS
     "lint": "eslint .",
-    
+    // Stylelint setup to organize CSS rules
     "lint:css": "bunx stylelint --fix \"src/**/*.css\"",
-    
-    
-    
-    
+    // 
+    // 
+    // DATABSE SCRIPTS
+    // Initializes posts and users
     "initdb:main": "bun run src/server/init_db_main.ts",
-    
-    
+    // 
+    // Initializes relics
     "initdb:relics": "bun run src/server/init_db_relics.ts",
-    
-    
+    // 
+    // Converts relics from JSON to SQL (takes a long time)
     "convert_relics": "bun run src/server/convert_relics.ts",
-    
-    
+    // 
+    // Seeds the database with relics and posts
     "seed": "bun run src/server/seed.ts",
     "seed-many": "bun run src/server/seed-many.ts",
-    
-    
+    // 
+    // Some shortcuts to intialize and seed the database
     "initdb:everything": "bun initdb:relics && bun convert_relics && bun initdb:main && bun seed-many",
     "initdb:main:full": "bun initdb:main && bun seed-many",
     "initdb:relics:full": "bun initdb:relics && bun convert_relics"
