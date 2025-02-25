@@ -6,6 +6,9 @@ import css from "./index.css?raw";
 import { PostRow } from "@/components/PostRow";
 import type { SearchSchemaInput } from "@tanstack/react-router";
 import RelicSearchBar from "@/components/RelicSearchBar";
+import { SortControls } from "@/components/SortControls";
+import { sortPosts } from "@/utils/sortRelics";
+import type { SortOptions } from "@/types/Sorting";
 
 export const Route = createFileRoute("/posts/")({
   component: App,
@@ -20,6 +23,10 @@ export const Route = createFileRoute("/posts/")({
 
 function App() {
   const [posts, setPosts] = useState<PostUI[]>([]);
+  const [sortOptions, setSortOptions] = useState<SortOptions>({
+    field: "tier",
+    direction: "asc",
+  });
   let { relic } = Route.useSearch();
   relic = relic.replace("%20", "_");
   const fetchPosts = useCallback(async () => {
@@ -47,11 +54,15 @@ function App() {
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
+
+  const sortedPosts = sortPosts(posts, sortOptions);
+
   return (
     <main>
       <Scoper style={css} />
       <h1 id="title">Warframe Relic LFG Active Posts</h1>
       <RelicSearchBar />
+      <SortControls sortOptions={sortOptions} onSortChange={setSortOptions} />
       <ul className="results-grid">
         <li className="results-grid__header results-grid__row">
           <span>Relic</span>
@@ -60,10 +71,9 @@ function App() {
           <span>Username</span>
           <span>Updated</span>
         </li>
-        {posts.length > 0 &&
-          posts
-            ?.toSorted((a, b) => a.updated_at - b.updated_at)
-            .map((post) => <PostRow post={post} key={post.post_id} />)}
+        {sortedPosts.map((post) => (
+          <PostRow post={post} key={post.post_id} />
+        ))}
       </ul>
     </main>
   );
