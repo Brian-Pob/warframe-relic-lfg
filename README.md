@@ -21,7 +21,7 @@ Makes use of [`@scope`](https://developer.mozilla.org/en-US/docs/Web/CSS/@scope)
 - [x] Add type-safety to query params on `/posts` route
 - [x] Implement search/ filter by relic in the posts UI. *Done, but consider further improvements.*
 - [ ] Add open graph tags to the site
-- [ ] Consolidate styles to use open props vars as much as possible
+- [x] Consolidate styles to use open props vars as much as possible
 - [ ] Make media queries more consistent. (Default should be mobile first)
 - [ ] Rename files to be more consistent. Mainly css files.
 - [ ] Implement ability to create a post (assuming user is logged in).
