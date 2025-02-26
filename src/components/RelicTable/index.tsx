@@ -72,14 +72,12 @@ const RelicRow = memo(
 const RelicTable = memo(
   ({ relicData, searchInput }: { relicData: Relic[]; searchInput: string }) => {
     return relicData.map((relic: Relic, index: number) => (
-      <>
-        <RelicRow
-          key={relic.relic_id + index.toString()}
-          relic={relic}
-          index={index}
-          searchInput={searchInput}
-        />
-      </>
+      <RelicRow
+        key={relic.relic_id + index.toString()}
+        relic={relic}
+        index={index}
+        searchInput={searchInput}
+      />
     ));
   },
 );
