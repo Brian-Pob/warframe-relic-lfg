@@ -88,8 +88,8 @@ const insertData = (db: Database, relics: UnprocessedRelic[]) => {
 
 // Main function to run the script
 const main = async () => {
-  const db = new Database("database.sqlite"); // Replace with your database file
-  const jsonFilePath = "src/server/relics.json"; // Replace with your JSON file path
+  const db = new Database("database.sqlite");
+  const jsonFilePath = "src/server/relics.json";
 
   const data = await loadJsonFile(jsonFilePath);
   insertData(db, data.relics);

@@ -24,9 +24,9 @@ const useFetchRelics = () => {
       localStorage.setItem(
         "relics",
         JSON.stringify(relicsJson)
-          .replaceAll("itemName", "item_name")
-          .replaceAll("relicName", "relic_name")
-          .replaceAll("state", "refinement"),
+          .replace(/itemName/g, "item_name")
+          .replace(/relicName/g, "relic_name")
+          .replace(/state/g, "refinement"),
       );
       setRelicData(JSON.parse(localStorage.getItem("relics") as string));
     } catch (error) {
